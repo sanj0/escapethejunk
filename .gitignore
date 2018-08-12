@@ -8,7 +8,7 @@
 *.ctxt
 
 # Intellij Idea stuff
-*.idea
+*.iml
 .idea/
 
 # Mobile Tools for Java (J2ME)
