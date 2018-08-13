@@ -28,18 +28,18 @@ public class GameScene extends Scene {
     private void addWalls(){
 
 
-        Wall above = new Wall(new Coordinates(0, 0), 1600, 100, Directions.Direction.down);
+        Wall above = new Wall(new Coordinates(0, 0), 1600, 100, Directions.Direction.DOWN);
         above.setMove(false);
-        Wall bottom = new Wall(new Coordinates(0, 850), 1600, 100, Directions.Direction.up);
+        Wall bottom = new Wall(new Coordinates(0, 850), 1600, 100, Directions.Direction.UP);
         bottom.setMove(false);
-        Wall right = new Wall(new Coordinates(1500, 100), 100, 750, Directions.Direction.left);
+        Wall RIGHT = new Wall(new Coordinates(1500, 100), 100, 750, Directions.Direction.LEFT);
 
-        Wall left = new Wall(new Coordinates(0, 100), 100, 750, Directions.Direction.right);
+        Wall LEFT = new Wall(new Coordinates(0, 100), 100, 750, Directions.Direction.RIGHT);
 
         addGameObject(above);
         addGameObject(bottom);
-        addGameObject(right);
-        addGameObject(left);
+        addGameObject(RIGHT);
+        addGameObject(LEFT);
     }
 
     private void addJunk(){

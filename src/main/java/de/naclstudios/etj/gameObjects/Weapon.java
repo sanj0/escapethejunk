@@ -26,8 +26,8 @@ public class Weapon extends GameObject {
         animation.setFrames(spritesheet.getManualFrames(new Coordinates(1, 1), new Coordinates(2, 1)));
 
         addComponent(animationRender);
-        removeComponent(DEFAULT_PHYSICS_NAME);
-        removeComponent(DEFAULT_PUSH_OUT_ON_COLLISION_NAME);
+        // removeComponent(DEFAULT_PHYSICS_NAME);
+        getPhysics().removeGravity();
     }
 
     public void initialize() {

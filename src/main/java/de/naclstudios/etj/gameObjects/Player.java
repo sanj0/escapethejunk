@@ -6,6 +6,7 @@ import de.edgelord.sjgl.cosmetic.Animation;
 import de.edgelord.sjgl.cosmetic.Spritesheet;
 import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
+import de.edgelord.sjgl.gameobject.components.SimplePhysicsComponent;
 import de.edgelord.sjgl.gameobject.components.rendering.AnimationRender;
 import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.resource.InnerResource;
@@ -46,8 +47,8 @@ public class Player extends GameObject {
 
         animationRender.setTicksPerFrame((int) (175 / StaticSystem.fixedTickMillis));
 
-        removeComponent(DEFAULT_PHYSICS_NAME);
-        // removeComponent(DEFAULT_PUSH_OUT_ON_COLLISION_NAME);
+        // removeComponent(DEFAULT_PHYSICS_NAME);
+        getPhysics().removeGravity();
         addComponent(animationRender);
 
         readAnimation();
@@ -63,38 +64,46 @@ public class Player extends GameObject {
     public void onFixedTick() {
 
         if (StaticSystem.inputUp) {
-            currentDirection = Directions.Direction.up;
-            moveUntilCollision(0.25f * StaticSystem.fixedTickMillis, Directions.Direction.up);
+            currentDirection = Directions.Direction.UP;
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setAcceleration(0.0025f);
+        } else {
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setAcceleration(0f);
         }
 
         if (StaticSystem.inputDown) {
-            currentDirection = Directions.Direction.down;
-            moveUntilCollision(0.25f * StaticSystem.fixedTickMillis, Directions.Direction.down);
+            currentDirection = Directions.Direction.DOWN;
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setAcceleration(0.0025f);
+        } else {
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setAcceleration(0f);
         }
 
         if (StaticSystem.inputRight) {
-            currentDirection = Directions.Direction.right;
-            moveUntilCollision(0.25f * StaticSystem.fixedTickMillis, Directions.Direction.right);
+            currentDirection = Directions.Direction.RIGHT;
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setAcceleration(0.0025f);
+        } else {
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setAcceleration(0f);
         }
 
         if (StaticSystem.inputLeft) {
-            currentDirection = Directions.Direction.left;
-            moveUntilCollision(0.25f * StaticSystem.fixedTickMillis, Directions.Direction.left);
+            currentDirection = Directions.Direction.LEFT;
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setAcceleration(0.0025f);
+        } else {
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setAcceleration(0f);
         }
 
         if (currentDirection != null) {
             switch (currentDirection) {
 
-                case right:
+                case RIGHT:
                     animationRender.setAnimation(walkRight);
                     break;
-                case left:
+                case LEFT:
                     animationRender.setAnimation(walkLeft);
                     break;
-                case up:
+                case UP:
                     animationRender.setAnimation(walkUp);
                     break;
-                case down:
+                case DOWN:
                     animationRender.setAnimation(walkDown);
                     break;
             }
@@ -137,18 +146,18 @@ public class Player extends GameObject {
 
             if (currentDirection == null){
 
-                StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.down));
+                StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
             } else {
                 switch (currentDirection){
 
 
-                    case right: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 25, getCoordinates().getY() + 53), Directions.Direction.right));
+                    case RIGHT: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 25, getCoordinates().getY() + 53), Directions.Direction.RIGHT));
                         break;
-                    case left: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 25, getCoordinates().getY() + 53), Directions.Direction.left));
+                    case LEFT: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 25, getCoordinates().getY() + 53), Directions.Direction.LEFT));
                         break;
-                    case   up: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.up));
+                    case   UP: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.UP));
                         break;
-                    case down: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.down));
+                    case DOWN: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
                         break;
                 }
             }

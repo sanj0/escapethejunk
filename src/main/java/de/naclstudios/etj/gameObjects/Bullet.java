@@ -30,7 +30,7 @@ public class Bullet extends GameObject {
         removeComponent(DEFAULT_PHYSICS_NAME);
         // removeComponent(DEFAULT_PUSH_OUT_ON_COLLISION_NAME);
 
-        if (direction == Directions.Direction.up || direction == Directions.Direction.down){
+        if (direction == Directions.Direction.UP || direction == Directions.Direction.DOWN){
             setWidth(7);
             setHeight(12);
         }

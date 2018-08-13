@@ -21,8 +21,8 @@ public class JunkHill extends GameObject {
     public JunkHill(Coordinates coordinates) {
         super(coordinates, 100, 100, "de.naclstudios.etj.gameObjects.junkHill");
 
-        removeComponent(DEFAULT_PHYSICS_NAME);
-        removeComponent(DEFAULT_PUSH_OUT_ON_COLLISION_NAME);
+        // removeComponent(DEFAULT_PHYSICS_NAME);
+        getPhysics().removeGravity();
 
         addComponent(ovalRender);
         addComponent(new PushInTheOppositeDirectionOnCollision(this, "test"));
