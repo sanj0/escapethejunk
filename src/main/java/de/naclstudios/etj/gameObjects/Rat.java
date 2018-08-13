@@ -1,14 +1,17 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.sjgl.core.Game;
 import de.edgelord.sjgl.core.event.CollisionEvent;
+import de.edgelord.sjgl.cosmetic.Animation;
+import de.edgelord.sjgl.cosmetic.Spritesheet;
+import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
+import de.edgelord.sjgl.gameobject.components.rendering.AnimationRender;
 import de.edgelord.sjgl.gameobject.components.rendering.RectangleRender;
 import de.edgelord.sjgl.location.Coordinates;
+import de.edgelord.sjgl.resource.InnerResource;
 import de.edgelord.sjgl.utils.Directions;
 import de.edgelord.sjgl.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
-import de.naclstudios.etj.scenes.GameScene;
 
 import java.awt.*;
 import java.util.Random;
@@ -19,11 +22,22 @@ public class Rat extends GameObject {
     private int ticks = 0;
     private Random random = new Random();
 
+    private Spritesheet spritesheet = new Spritesheet(new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/rat.png"), 477, 235);
+
+    private Animation walkRight = new Animation(this);
+    private Animation walkLeft = new Animation(this);
+
+    private AnimationRender render = new AnimationRender(this, "animaitonRender");
+
     public Rat(Coordinates coordinates) {
-        super(coordinates, 47, 23, "de.naclstudios.etj.gameObjects.rat");
+        super(coordinates, 56, 28, "de.naclstudios.etj.gameObjects.rat");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
-        addComponent(new RectangleRender(this, "test"));
+
+        walkRight.setFrames(spritesheet.getManualFrames(new Coordinates(1, 1), new Coordinates(1, 2), new Coordinates(1, 1), new Coordinates(1, 3)));
+        walkLeft.setFrames(spritesheet.getManualFrames(new Coordinates(2, 1), new Coordinates(2, 2), new Coordinates(2, 1), new Coordinates(2, 3)));
+
+        addComponent(render);
     }
 
     public void initialize() {
@@ -86,6 +100,7 @@ public class Rat extends GameObject {
 
         if (randomDir == 2){
             if (getPosition().getX() <= 1600 - EscapeTheJunk.currentWallDelta) {
+                render.setAnimation(walkRight);
                 move(15f, Directions.Direction.RIGHT);
                 return;
             }
@@ -93,6 +108,7 @@ public class Rat extends GameObject {
 
         if (randomDir == 3){
             if (getPosition().getX() >= EscapeTheJunk.currentWallDelta) {
+                render.setAnimation(walkLeft);
                 move(15f, Directions.Direction.LEFT);
             }
         }
