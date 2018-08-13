@@ -7,6 +7,9 @@ import de.edgelord.sjgl.gameobject.GameObject;
 import de.edgelord.sjgl.gameobject.components.rendering.ImageRender;
 import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.resource.InnerResource;
+import de.edgelord.sjgl.utils.StaticSystem;
+import de.naclstudios.etj.scenes.EndScene;
+import de.naclstudios.etj.scenes.GameScene;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -33,8 +36,8 @@ public class Door extends GameObject {
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
             Player player = (Player) e.getRoot();
 
-            if (player.getCollectedKeyFragments() == Player.REQUIREDKEYFRAGMENTS){
-                // Trigger end of the game
+            if (player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS){
+                StaticSystem.currentScene = new EndScene(true);
                 System.out.println("You win!");
             }
         }
@@ -50,5 +53,8 @@ public class Door extends GameObject {
 
     public void draw(Graphics2D graphics2D) {
 
+        graphics2D.setColor(Color.black);
+        graphics2D.drawRect(10, 10, 200, 30);
+        graphics2D.fillRect(10, 10, (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
     }
 }

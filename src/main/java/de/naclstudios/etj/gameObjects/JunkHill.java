@@ -26,12 +26,19 @@ public class JunkHill extends GameObject {
     private int hitCounter = 0;
 
     public JunkHill(Coordinates coordinates) {
-        super(coordinates, 147, 130, "de.naclstudios.etj.gameObjects.junkHill");
+        super(coordinates, 147, 132, "de.naclstudios.etj.gameObjects.junkHill");
 
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
+        addComponent(new DrawHitboxComponent(this, "test"));
 
         addComponent(imageRender);
+
+        getHitbox().setOffsetX(10);
+        getHitbox().setOffsetY(20);
+
+        getHitbox().setWidth(127);
+        getHitbox().setHeight(112);
     }
 
     public void initialize() {

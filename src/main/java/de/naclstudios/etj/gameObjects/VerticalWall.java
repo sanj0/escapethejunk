@@ -3,6 +3,7 @@ package de.naclstudios.etj.gameObjects;
 import de.edgelord.sjgl.core.event.CollisionEvent;
 import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
+import de.edgelord.sjgl.gameobject.components.DrawHitboxComponent;
 import de.edgelord.sjgl.gameobject.components.rendering.ImageRender;
 import de.edgelord.sjgl.gameobject.components.rendering.RectangleRender;
 import de.edgelord.sjgl.location.Coordinates;
@@ -11,6 +12,7 @@ import de.edgelord.sjgl.resource.InnerResource;
 import de.edgelord.sjgl.utils.Directions;
 import de.edgelord.sjgl.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
+import de.naclstudios.etj.scenes.EndScene;
 import sun.print.DialogOwner;
 
 import java.awt.*;
@@ -41,20 +43,21 @@ public class VerticalWall extends GameObject {
         addComponent(new ImageRender(this, "de.naclstudios.etj.gameObject.walls.imageRender", image));
 
         removeComponent(DEFAULT_PHYSICS_NAME);
+        addComponent(new DrawHitboxComponent(this, "test"));
     }
 
     public void initialize() {
 
     }
 
-    public void onCollision(CollisionEvent collisionEvent) {
+    public void onCollision(CollisionEvent e) {
 
     }
 
     public void onFixedTick() {
 
         if (move) {
-            if (ticks == 7000 / StaticSystem.fixedTickMillis) {
+            if (ticks == 5000 / StaticSystem.fixedTickMillis) {
                 makeMove(25f);
                 EscapeTheJunk.currentWallDelta += 12.5f;
                 ticks = 0;

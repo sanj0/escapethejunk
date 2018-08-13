@@ -13,6 +13,7 @@ import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.resource.InnerResource;
 import de.edgelord.sjgl.utils.Directions;
 import de.edgelord.sjgl.utils.StaticSystem;
+import de.naclstudios.etj.scenes.EndScene;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -22,7 +23,7 @@ import java.nio.Buffer;
 public class Player extends GameObject {
 
     private int collectedKeyFragments = 0;
-    public static final int REQUIREDKEYFRAGMENTS = 4;
+    public static final int REQUIREDKEYFRAGMENTS = 5;
 
     private ImageFactory imageFactory = new ImageFactory(new InnerResource());
 
@@ -60,6 +61,8 @@ public class Player extends GameObject {
     private boolean cooldown = false;
     private int ticks = 0;
 
+    private int secureTicks = 0;
+
     public Player() {
         super(Game.getDisplayManager().getCenter(71, 91), 71, 91, "de.naclstudios.etj.gameObject.player");
 
@@ -68,6 +71,7 @@ public class Player extends GameObject {
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
         addComponent(animationRender);
+        addComponent(new DrawHitboxComponent(this, "test"));
         currentDirection = Directions.Direction.DOWN;
         readAnimation();
     }
@@ -75,13 +79,22 @@ public class Player extends GameObject {
     public void initialize() {
     }
 
-    public void onCollision(CollisionEvent collisionEvent) {
+    public void onCollision(CollisionEvent e) {
 
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")){
+            if (secureTicks > 10) {
+                StaticSystem.currentScene = new EndScene(false);
+            }
+        }
     }
 
     public void onFixedTick() {
 
         freeze = true;
+
+        if (secureTicks < 300) {
+            secureTicks++;
+        }
 
         if (StaticSystem.inputUp) {
 
@@ -122,18 +135,22 @@ public class Player extends GameObject {
                 case RIGHT:
                     animationRender.setAnimation(walkRight);
                     currentFreezeImage = right;
+                    setSlimHitbox();
                     break;
                 case LEFT:
                     animationRender.setAnimation(walkLeft);
                     currentFreezeImage = left;
+                    setSlimHitbox();
                     break;
                 case UP:
                     animationRender.setAnimation(walkUp);
                     currentFreezeImage = up;
+                    setBigHitbox();
                     break;
                 case DOWN:
                     animationRender.setAnimation(walkDown);
                     currentFreezeImage = down;
+                    setBigHitbox();
                     break;
             }
         }
@@ -192,6 +209,16 @@ public class Player extends GameObject {
                 }
             }
         }
+    }
+
+    private void setSlimHitbox() {
+        getHitbox().setOffsetX(14);
+        getHitbox().setWidth(45);
+    }
+
+    private void setBigHitbox() {
+        getHitbox().setWidth(71);
+        getHitbox().setOffsetX(0);
     }
 
     public boolean isHasWeapon() {

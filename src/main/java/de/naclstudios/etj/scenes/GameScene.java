@@ -10,14 +10,17 @@ import java.util.Random;
 
 public class GameScene extends Scene {
 
-    public static Player player = new Player();
+    public static Player player;
     private Random random = new Random();
 
     public GameScene() {
 
+        player = new Player();
+
         addGameObject(player);
         addGameObject(new Weapon(new Coordinates(Game.getDisplayManager().getHorizontalCenter(72) + 100, Game.getDisplayManager().getVerticalCenter(65))));
 
+        addRats();
         addJunk();
 
         addFixedTask(new JunkGenerator());
@@ -39,6 +42,19 @@ public class GameScene extends Scene {
         addGameObject(RIGHT);
         addGameObject(LEFT);
     }
+
+    private void addRats(){
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        }
 
     private void addJunk(){
         addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
