@@ -20,24 +20,22 @@ public class GameScene extends Scene {
 
         addJunk();
 
-        addGameObject(new JunkGenerator());
+        addFixedTask(new JunkGenerator());
 
+        addGameObject(new HorizontalWall(Directions.Direction.UP));
+        addGameObject(new HorizontalWall(Directions.Direction.DOWN));
         addWalls();
+
+        addDrawingRoutin(new DrawBackground());
+
+        addGameObject(new Door());
     }
 
     private void addWalls(){
 
+        VerticalWall RIGHT = new VerticalWall(Directions.Direction.LEFT);
+        VerticalWall LEFT = new VerticalWall(Directions.Direction.RIGHT);
 
-        Wall above = new Wall(new Coordinates(0, 0), 1600, 100, Directions.Direction.DOWN);
-        above.setMove(false);
-        Wall bottom = new Wall(new Coordinates(0, 850), 1600, 100, Directions.Direction.UP);
-        bottom.setMove(false);
-        Wall RIGHT = new Wall(new Coordinates(1500, 100), 100, 750, Directions.Direction.LEFT);
-
-        Wall LEFT = new Wall(new Coordinates(0, 100), 100, 750, Directions.Direction.RIGHT);
-
-        addGameObject(above);
-        addGameObject(bottom);
         addGameObject(RIGHT);
         addGameObject(LEFT);
     }

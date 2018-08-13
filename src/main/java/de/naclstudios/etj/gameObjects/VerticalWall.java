@@ -1,29 +1,45 @@
 package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.sjgl.core.event.CollisionEvent;
+import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
+import de.edgelord.sjgl.gameobject.components.rendering.ImageRender;
 import de.edgelord.sjgl.gameobject.components.rendering.RectangleRender;
 import de.edgelord.sjgl.location.Coordinates;
+import de.edgelord.sjgl.location.Vector2f;
+import de.edgelord.sjgl.resource.InnerResource;
 import de.edgelord.sjgl.utils.Directions;
 import de.edgelord.sjgl.utils.StaticSystem;
+import de.naclstudios.etj.main.EscapeTheJunk;
+import sun.print.DialogOwner;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class Wall extends GameObject {
+public class VerticalWall extends GameObject {
 
     private Directions.Direction direction;
     private boolean move = true;
 
+    private BufferedImage image;
+
     private int ticks = 0;
 
-    private RectangleRender rectangleRender = new RectangleRender(this, "recatngleRender");
-
-    public Wall(Coordinates coordinates, int width, int height, Directions.Direction direction) {
-        super(coordinates, width, height, "de.naclstudios.etj.gameObjects.wall");
+    public VerticalWall(Directions.Direction direction) {
+        super(new Coordinates(0, 0), 950, 950, "de.naclstudios.etj.gameObjects.wall");
 
         this.direction = direction;
 
-        addComponent(rectangleRender);
+        if (direction == Directions.Direction.LEFT){
+            image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_right.png");
+            setPosition(new Vector2f(1423, 0));
+        } else if (direction == Directions.Direction.RIGHT){
+            image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_left.png");
+            setPosition(new Vector2f(-773, 0));
+        }
+
+        addComponent(new ImageRender(this, "de.naclstudios.etj.gameObject.walls.imageRender", image));
+
         removeComponent(DEFAULT_PHYSICS_NAME);
     }
 
@@ -40,6 +56,7 @@ public class Wall extends GameObject {
         if (move) {
             if (ticks == 7000 / StaticSystem.fixedTickMillis) {
                 makeMove(25f);
+                EscapeTheJunk.currentWallDelta += 12.5f;
                 ticks = 0;
             } else {
                 ticks++;

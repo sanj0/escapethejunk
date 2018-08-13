@@ -12,7 +12,7 @@ public class Bullet extends GameObject {
 
     public static float DEFAULT_RANGE = 550;
     public static float DEFAULT_VELOCITY = 0.85f;
-    public static Color color = new Color(166, 121, 45);
+    public static Color color = Color.black;
 
     private int id = BulletIdManager.getNewId();
 

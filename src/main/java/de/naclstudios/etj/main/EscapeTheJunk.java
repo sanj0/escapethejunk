@@ -8,14 +8,14 @@ import java.awt.*;
 
 public class EscapeTheJunk extends Game {
 
+    public static float currentWallDelta = 177f;
+
     public EscapeTheJunk(long fixedTickMillis) {
         super(1600, 950, "Escape the Junk", fixedTickMillis);
     }
 
     public static void main(String[] args) {
         EscapeTheJunk escapeTheJunk = new EscapeTheJunk(1);
-
-        getDisplayManager().getStage().setBackground(new Color(49, 51, 49));
 
         start(60);
         StaticSystem.drawFPS = false;

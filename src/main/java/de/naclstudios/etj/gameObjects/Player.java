@@ -6,6 +6,7 @@ import de.edgelord.sjgl.cosmetic.Animation;
 import de.edgelord.sjgl.cosmetic.Spritesheet;
 import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
+import de.edgelord.sjgl.gameobject.components.DrawHitboxComponent;
 import de.edgelord.sjgl.gameobject.components.SimplePhysicsComponent;
 import de.edgelord.sjgl.gameobject.components.rendering.AnimationRender;
 import de.edgelord.sjgl.location.Coordinates;
@@ -16,26 +17,43 @@ import de.edgelord.sjgl.utils.StaticSystem;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 public class Player extends GameObject {
+
+    private int collectedKeyFragments = 0;
+    public static final int REQUIREDKEYFRAGMENTS = 4;
 
     private ImageFactory imageFactory = new ImageFactory(new InnerResource());
 
     private AnimationRender animationRender = new AnimationRender(this, "de.naclstudios.etj.gameObjects.player.animationRender");
 
-    private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 143, 182);
+    private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 143, 184);
 
     private Animation walkUp = new Animation(this);
     private Animation walkDown = new Animation(this);
     private Animation walkRight = new Animation(this);
     private Animation walkLeft = new Animation(this);
 
+    private BufferedImage up = mainCharSpriteSheet.getManualSprite(1, 1);
+    private BufferedImage down = mainCharSpriteSheet.getManualSprite(2, 1);
+    private BufferedImage right = mainCharSpriteSheet.getManualSprite(3, 1);
+    private BufferedImage left = mainCharSpriteSheet.getManualSprite(5, 1);
+
+    private BufferedImage currentFreezeImage;
+
     private Coordinates[] walkUpSprites = {new Coordinates(1, 1), new Coordinates(1, 2), new Coordinates(1, 1), new Coordinates(1, 3)};
-    private Coordinates[] walkDownSprites = {new Coordinates(2, 4), new Coordinates(2, 5), new Coordinates(2, 4), new Coordinates(2, 6)};
-    private Coordinates[] walkRightSprites = {new Coordinates(5, 1), new Coordinates(5, 2), new Coordinates(5, 1), new Coordinates(5, 3)};
+    private Coordinates[] walkDownSprites = {new Coordinates(2, 1), new Coordinates(2, 2), new Coordinates(2, 1), new Coordinates(2, 3)};
+    private Coordinates[] walkRightSprites = {new Coordinates(3, 1), new Coordinates(3, 2), new Coordinates(3, 1), new Coordinates(3, 3)};
     private Coordinates[] walkLeftSprites = {new Coordinates(6, 1), new Coordinates(6, 2), new Coordinates(6, 1), new Coordinates(6, 3)};
 
-    private Directions.Direction currentDirection = null;
+    private Coordinates[] walkUpSpritesWeapon = {new Coordinates(1, 4), new Coordinates(1, 5), new Coordinates(1, 4), new Coordinates(1, 6)};
+    private Coordinates[] walkDownSpritesWeapon = {new Coordinates(2, 4), new Coordinates(2, 5), new Coordinates(2, 4), new Coordinates(2, 6)};
+    private Coordinates[] walkRightSpritesWeapon = {new Coordinates(4, 1), new Coordinates(4, 2), new Coordinates(4, 1), new Coordinates(4, 3)};
+    private Coordinates[] walkLeftSpritesWeapon = {new Coordinates(5, 4), new Coordinates(5, 5), new Coordinates(5, 4), new Coordinates(5, 6)};
+
+    private Directions.Direction currentDirection;
+    private boolean freeze = true;
 
     private boolean hasWeapon = false;
     private int weaponCooldown = (int) (350 * StaticSystem.fixedTickMillis);
@@ -50,7 +68,7 @@ public class Player extends GameObject {
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
         addComponent(animationRender);
-
+        currentDirection = Directions.Direction.DOWN;
         readAnimation();
     }
 
@@ -63,32 +81,39 @@ public class Player extends GameObject {
 
     public void onFixedTick() {
 
+        freeze = true;
+
         if (StaticSystem.inputUp) {
+
             currentDirection = Directions.Direction.UP;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setAcceleration(0.0025f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setVelocity(0.35f);
+            freeze = false;
         } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setAcceleration(0f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setVelocity(0f);
         }
 
         if (StaticSystem.inputDown) {
             currentDirection = Directions.Direction.DOWN;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setAcceleration(0.0025f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setVelocity(0.35f);
+            freeze = false;
         } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setAcceleration(0f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setVelocity(0f);
         }
 
         if (StaticSystem.inputRight) {
             currentDirection = Directions.Direction.RIGHT;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setAcceleration(0.0025f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setVelocity(0.35f);
+            freeze = false;
         } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setAcceleration(0f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setVelocity(0f);
         }
 
         if (StaticSystem.inputLeft) {
             currentDirection = Directions.Direction.LEFT;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setAcceleration(0.0025f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setVelocity(0.35f);
+            freeze = false;
         } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setAcceleration(0f);
+            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setVelocity(0f);
         }
 
         if (currentDirection != null) {
@@ -96,15 +121,19 @@ public class Player extends GameObject {
 
                 case RIGHT:
                     animationRender.setAnimation(walkRight);
+                    currentFreezeImage = right;
                     break;
                 case LEFT:
                     animationRender.setAnimation(walkLeft);
+                    currentFreezeImage = left;
                     break;
                 case UP:
                     animationRender.setAnimation(walkUp);
+                    currentFreezeImage = up;
                     break;
                 case DOWN:
                     animationRender.setAnimation(walkDown);
+                    currentFreezeImage = down;
                     break;
             }
         }
@@ -131,8 +160,9 @@ public class Player extends GameObject {
 
     public void draw(Graphics2D graphics2D) {
 
-        if (currentDirection == null) {
+        if (freeze) {
             animationRender.disable();
+            graphics2D.drawImage(currentFreezeImage, getCoordinates().getX(), getCoordinates().getY(), getWidth(), getHeight(), null);
         } else {
             animationRender.enable();
         }
@@ -170,6 +200,18 @@ public class Player extends GameObject {
 
     public void setHasWeapon(boolean hasWeapon) {
         this.hasWeapon = hasWeapon;
+
+        if (hasWeapon){
+            walkUp.setFrames(mainCharSpriteSheet.getManualFrames(walkUpSpritesWeapon));
+            walkDown.setFrames(mainCharSpriteSheet.getManualFrames(walkDownSpritesWeapon));
+            walkLeft.setFrames(mainCharSpriteSheet.getManualFrames(walkLeftSpritesWeapon));
+            walkRight.setFrames(mainCharSpriteSheet.getManualFrames(walkRightSpritesWeapon));
+
+            up = mainCharSpriteSheet.getManualSprite(1, 4);
+            down = mainCharSpriteSheet.getManualSprite(2, 4);
+            right = mainCharSpriteSheet.getManualSprite(4, 1);
+            left = mainCharSpriteSheet.getManualSprite(5, 4);
+        }
     }
 
     private void readAnimation() {
@@ -182,5 +224,13 @@ public class Player extends GameObject {
     public void readAnimationWithWeapon() {
         mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar-with-weapon.png"), 143, 182);
         readAnimation();
+    }
+
+    public int getCollectedKeyFragments() {
+        return collectedKeyFragments;
+    }
+
+    public void setCollectedKeyFragments(int collectedKeyFragments) {
+        this.collectedKeyFragments = collectedKeyFragments;
     }
 }
