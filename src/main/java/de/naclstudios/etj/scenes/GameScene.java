@@ -54,7 +54,9 @@ public class GameScene extends Scene {
         addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        }
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+    }
 
     private void addJunk(){
         addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));

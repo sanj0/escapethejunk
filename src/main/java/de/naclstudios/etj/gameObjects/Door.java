@@ -53,8 +53,8 @@ public class Door extends GameObject {
 
     public void draw(Graphics2D graphics2D) {
 
-        graphics2D.setColor(Color.black);
-        graphics2D.drawRect(10, 10, 200, 30);
+        graphics2D.setColor(Color.yellow);
+        graphics2D.drawRect(10, 10, 195, 30);
         graphics2D.fillRect(10, 10, (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
     }
 }

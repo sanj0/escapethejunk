@@ -5,6 +5,7 @@ import de.edgelord.sjgl.gameobject.GameObject;
 import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.utils.Directions;
 import de.edgelord.sjgl.utils.StaticSystem;
+import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.*;
 
@@ -34,6 +35,8 @@ public class Bullet extends GameObject {
             setWidth(7);
             setHeight(12);
         }
+
+        EscapeTheJunk.sounds.play("shot");
     }
 
     public void initialize() {

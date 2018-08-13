@@ -43,7 +43,6 @@ public class VerticalWall extends GameObject {
         addComponent(new ImageRender(this, "de.naclstudios.etj.gameObject.walls.imageRender", image));
 
         removeComponent(DEFAULT_PHYSICS_NAME);
-        addComponent(new DrawHitboxComponent(this, "test"));
     }
 
     public void initialize() {

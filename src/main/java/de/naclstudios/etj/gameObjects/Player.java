@@ -23,7 +23,7 @@ import java.nio.Buffer;
 public class Player extends GameObject {
 
     private int collectedKeyFragments = 0;
-    public static final int REQUIREDKEYFRAGMENTS = 5;
+    public static final int REQUIREDKEYFRAGMENTS = 7;
 
     private ImageFactory imageFactory = new ImageFactory(new InnerResource());
 
@@ -71,7 +71,6 @@ public class Player extends GameObject {
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
         addComponent(animationRender);
-        addComponent(new DrawHitboxComponent(this, "test"));
         currentDirection = Directions.Direction.DOWN;
         readAnimation();
     }

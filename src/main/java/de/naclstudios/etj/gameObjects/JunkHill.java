@@ -4,13 +4,11 @@ import de.edgelord.sjgl.core.event.CollisionEvent;
 import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
 import de.edgelord.sjgl.gameobject.components.DrawHitboxComponent;
-import de.edgelord.sjgl.gameobject.components.DrawPositionComponent;
-import de.edgelord.sjgl.gameobject.components.PushInTheOppositeDirectionOnCollision;
 import de.edgelord.sjgl.gameobject.components.rendering.ImageRender;
-import de.edgelord.sjgl.gameobject.components.rendering.OvalRender;
 import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.resource.InnerResource;
 import de.edgelord.sjgl.utils.StaticSystem;
+import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,7 +28,6 @@ public class JunkHill extends GameObject {
 
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
-        addComponent(new DrawHitboxComponent(this, "test"));
 
         addComponent(imageRender);
 
@@ -48,6 +45,7 @@ public class JunkHill extends GameObject {
     public void onCollision(CollisionEvent e) {
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")){
+            EscapeTheJunk.sounds.play("junk_destroyed");
             StaticSystem.currentScene.getGameObjects().remove(this);
         }
     }
@@ -77,11 +75,12 @@ public class JunkHill extends GameObject {
         hitCounter++;
 
         if (hitCounter >= 3){
-            getTheFuckOutOfMyRoomImPlayingMinecraft();
+            EscapeTheJunk.sounds.play("junk_destroyed");
+            removeFromScene();
         }
     }
 
-    private void getTheFuckOutOfMyRoomImPlayingMinecraft(){
+    private void removeFromScene(){
         StaticSystem.currentScene.getGameObjects().remove(this);
     }
 }

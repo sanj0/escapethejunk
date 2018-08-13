@@ -40,6 +40,7 @@ public class Rat extends GameObject {
     public void onFixedTick() {
 
         if (health <= 0){
+            EscapeTheJunk.sounds.play("rat_dies");
             spawnKey();
             StaticSystem.currentScene.getGameObjects().remove(this);
         }
@@ -62,9 +63,7 @@ public class Rat extends GameObject {
 
     private void spawnKey(){
 
-        if (GameScene.player.getCollectedKeyFragments() < Player.REQUIREDKEYFRAGMENTS) {
-            StaticSystem.currentScene.addGameObject(new KeyFragment(getCoordinates()));
-        }
+        StaticSystem.currentScene.addGameObject(new KeyFragment(getCoordinates()));
     }
 
     private void runAway(){

@@ -29,6 +29,8 @@ public class MenuScreen extends Scene {
 
         addAudio();
 
+        addDrawingRoutin(new MenuBackGround());
+
         audioSystem.loop("de.naclstudios.etj.music.menuMusic");
     }
 

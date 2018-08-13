@@ -7,6 +7,7 @@ import de.edgelord.sjgl.gameobject.components.rendering.ImageRender;
 import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.resource.InnerResource;
 import de.edgelord.sjgl.utils.StaticSystem;
+import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,6 +31,8 @@ public class KeyFragment extends GameObject {
     public void onCollision(CollisionEvent e) {
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
+
+            EscapeTheJunk.sounds.play("key_collected");
             Player player = (Player) e.getRoot();
 
             player.setCollectedKeyFragments(player.getCollectedKeyFragments() + 1);
