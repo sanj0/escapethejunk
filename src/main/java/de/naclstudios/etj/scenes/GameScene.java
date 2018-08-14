@@ -5,6 +5,7 @@ import de.edgelord.sjgl.location.Coordinates;
 import de.edgelord.sjgl.scene.Scene;
 import de.edgelord.sjgl.utils.Directions;
 import de.naclstudios.etj.gameObjects.*;
+import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.util.Random;
 
@@ -14,6 +15,8 @@ public class GameScene extends Scene {
     private Random random = new Random();
 
     public GameScene() {
+
+        EscapeTheJunk.currentWallDelta = 177f;
 
         player = new Player();
 
