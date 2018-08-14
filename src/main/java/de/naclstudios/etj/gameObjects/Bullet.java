@@ -52,7 +52,7 @@ public class Bullet extends GameObject {
             junkHill.hitByBullet(this);
         }
 
-        if (!e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
+        if (!e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player") && !e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.keyFragment")){
 
             StaticSystem.currentScene.getGameObjects().remove(this);
         }

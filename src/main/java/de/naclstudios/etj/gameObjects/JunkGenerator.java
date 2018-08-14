@@ -34,7 +34,9 @@ public class JunkGenerator implements FixedTask {
         int maxX = (int) (1600 - EscapeTheJunk.currentWallDelta);
 
         if (ticks == spawnRate * StaticSystem.fixedTickMillis){
-            StaticSystem.currentScene.getGameObjects().add(StaticSystem.currentScene.getGameObjects().size() - 5, new JunkHill(new Coordinates(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
+            if (maxX - min > 0) {
+                StaticSystem.currentScene.getGameObjects().add(StaticSystem.currentScene.getGameObjects().size() - 5, new JunkHill(new Coordinates(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
+            }
 
             ticks = 0;
         } else {
