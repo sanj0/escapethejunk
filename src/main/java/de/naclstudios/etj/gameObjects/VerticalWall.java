@@ -61,7 +61,7 @@ public class VerticalWall extends GameObject {
     public void onFixedTick() {
 
         if (move) {
-            if (ticks == 250 / StaticSystem.fixedTickMillis) {
+            if (ticks == 2500 / StaticSystem.fixedTickMillis) {
                 makeMove(25f);
                 EscapeTheJunk.currentWallDelta += 12.5f;
                 ticks = 0;
