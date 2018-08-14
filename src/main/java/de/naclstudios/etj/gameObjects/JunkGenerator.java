@@ -15,7 +15,7 @@ public class JunkGenerator implements FixedTask {
     private int ticks = 0;
     private Random random = new Random();
 
-    public static int spawnRate = 2500;
+    public static int spawnRate = 1500;
 
     public JunkGenerator() {
     }
