@@ -23,7 +23,7 @@ import java.nio.Buffer;
 public class Player extends GameObject {
 
     private int collectedKeyFragments = 0;
-    public static final int REQUIREDKEYFRAGMENTS = 7;
+    public static final int REQUIREDKEYFRAGMENTS = 13;
 
     private ImageFactory imageFactory = new ImageFactory(new InnerResource());
 
@@ -81,8 +81,11 @@ public class Player extends GameObject {
     public void onCollision(CollisionEvent e) {
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")){
-            if (secureTicks > 10) {
-                StaticSystem.currentScene = new EndScene(false);
+
+            if (e.getCollisionDirections().hasDirection(Directions.Direction.LEFT) && e.getCollisionDirections().hasDirection(Directions.Direction.RIGHT)) {
+                if (secureTicks > 10) {
+                    StaticSystem.currentScene = new EndScene(false);
+                }
             }
         }
     }

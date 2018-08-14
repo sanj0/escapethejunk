@@ -1,5 +1,6 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.sjgl.core.Game;
 import de.edgelord.sjgl.core.event.CollisionEvent;
 import de.edgelord.sjgl.factory.ImageFactory;
 import de.edgelord.sjgl.gameobject.GameObject;
@@ -13,6 +14,7 @@ import de.edgelord.sjgl.utils.Directions;
 import de.edgelord.sjgl.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.EndScene;
+import de.naclstudios.etj.scenes.GameScene;
 import sun.print.DialogOwner;
 
 import java.awt.*;
@@ -51,6 +53,9 @@ public class VerticalWall extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
+            GameScene.player.move(12.5f, direction);
+        }
     }
 
     public void onFixedTick() {
@@ -76,6 +81,15 @@ public class VerticalWall extends GameObject {
 
     public void makeMove(float delta){
 
+        if (direction == Directions.Direction.RIGHT) {
+            if (GameScene.player.getX() <= (getX() + getWidth() + delta)) {
+                GameScene.player.move(50f, direction);
+            }
+        } else {
+            if (GameScene.player.getX() >= getX() + delta){
+                GameScene.player.move(-50f, direction);
+            }
+        }
         move(delta, direction);
     }
 
