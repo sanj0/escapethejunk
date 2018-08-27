@@ -10,8 +10,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.edgelord.sjgl</groupId>
-            <artifactId>sjgl</artifactId>
+            <groupId>de.edgelord.salty-engine</groupId>
+            <artifactId>salty-engine</artifactId>
             <version>0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
