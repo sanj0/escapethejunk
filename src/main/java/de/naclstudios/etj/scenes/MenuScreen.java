@@ -1,14 +1,14 @@
 package de.naclstudios.etj.scenes;
 
-import de.edgelord.sjgl.audio.AudioSystem;
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.factory.ImageFactory;
-import de.edgelord.sjgl.location.Coordinates;
-import de.edgelord.sjgl.resource.InnerResource;
-import de.edgelord.sjgl.scene.Scene;
-import de.edgelord.sjgl.ui.UISystem;
-import de.edgelord.sjgl.ui.elements.TexturedButton;
-import de.edgelord.sjgl.utils.StaticSystem;
+import de.edgelord.saltyengine.audio.AudioSystem;
+import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.factory.ImageFactory;
+import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.scene.Scene;
+import de.edgelord.saltyengine.ui.UISystem;
+import de.edgelord.saltyengine.ui.elements.TexturedButton;
+import de.edgelord.saltyengine.utils.StaticSystem;
 
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -35,7 +35,7 @@ public class MenuScreen extends Scene {
     }
 
     private void addAudio() {
-        audioSystem.loadNewAudio("de.naclstudios.etj.music.menuMusic", "audio/music/menu_track.wav");
+        audioSystem.loadNewAudio("de.naclstudios.etj.music.menuMusic", "audio/music/Junk Theme.wav");
     }
 
     private void addUI() {

@@ -1,21 +1,16 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.core.event.CollisionEvent;
-import de.edgelord.sjgl.factory.ImageFactory;
-import de.edgelord.sjgl.gameobject.GameObject;
-import de.edgelord.sjgl.gameobject.components.DrawHitboxComponent;
-import de.edgelord.sjgl.gameobject.components.rendering.ImageRender;
-import de.edgelord.sjgl.gameobject.components.rendering.RectangleRender;
-import de.edgelord.sjgl.location.Coordinates;
-import de.edgelord.sjgl.location.Vector2f;
-import de.edgelord.sjgl.resource.InnerResource;
-import de.edgelord.sjgl.utils.Directions;
-import de.edgelord.sjgl.utils.StaticSystem;
+import de.edgelord.saltyengine.core.event.CollisionEvent;
+import de.edgelord.saltyengine.factory.ImageFactory;
+import de.edgelord.saltyengine.gameobject.GameObject;
+import de.edgelord.saltyengine.gameobject.components.rendering.ImageRender;
+import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.location.Vector2f;
+import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.utils.Directions;
+import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
-import de.naclstudios.etj.scenes.EndScene;
 import de.naclstudios.etj.scenes.GameScene;
-import sun.print.DialogOwner;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

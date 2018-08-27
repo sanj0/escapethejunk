@@ -1,9 +1,9 @@
 package de.naclstudios.etj.scenes;
 
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.core.event.CollisionEvent;
-import de.edgelord.sjgl.gameobject.GameObject;
-import de.edgelord.sjgl.location.Coordinates;
+import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.core.event.CollisionEvent;
+import de.edgelord.saltyengine.gameobject.GameObject;
+import de.edgelord.saltyengine.location.Coordinates;
 
 import java.awt.*;
 

@@ -1,8 +1,8 @@
 package de.naclstudios.etj.main;
 
-import de.edgelord.sjgl.audio.AudioSystem;
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.utils.StaticSystem;
+import de.edgelord.saltyengine.audio.AudioSystem;
+import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.scenes.MenuScreen;
 
 public class EscapeTheJunk extends Game {

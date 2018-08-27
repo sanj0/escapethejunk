@@ -1,9 +1,9 @@
 package de.naclstudios.etj.scenes;
 
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.location.Coordinates;
-import de.edgelord.sjgl.scene.Scene;
-import de.edgelord.sjgl.utils.Directions;
+import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.scene.Scene;
+import de.edgelord.saltyengine.utils.Directions;
 import de.naclstudios.etj.gameObjects.*;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
@@ -47,6 +47,9 @@ public class GameScene extends Scene {
     }
 
     private void addRats(){
+        /*
+        There would normally be a for or while...
+         */
         addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));

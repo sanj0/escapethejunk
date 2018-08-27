@@ -1,8 +1,8 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.sjgl.factory.ImageFactory;
-import de.edgelord.sjgl.gameobject.DrawingRoutin;
-import de.edgelord.sjgl.resource.InnerResource;
+import de.edgelord.saltyengine.factory.ImageFactory;
+import de.edgelord.saltyengine.gameobject.DrawingRoutin;
+import de.edgelord.saltyengine.resource.InnerResource;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

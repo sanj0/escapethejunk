@@ -1,26 +1,23 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.core.event.CollisionEvent;
-import de.edgelord.sjgl.core.event.TouchingEvent;
-import de.edgelord.sjgl.cosmetic.Animation;
-import de.edgelord.sjgl.cosmetic.Spritesheet;
-import de.edgelord.sjgl.factory.ImageFactory;
-import de.edgelord.sjgl.gameobject.GameObject;
-import de.edgelord.sjgl.gameobject.components.DrawHitboxComponent;
-import de.edgelord.sjgl.gameobject.components.SimplePhysicsComponent;
-import de.edgelord.sjgl.gameobject.components.rendering.AnimationRender;
-import de.edgelord.sjgl.location.Coordinates;
-import de.edgelord.sjgl.resource.InnerResource;
-import de.edgelord.sjgl.utils.Directions;
-import de.edgelord.sjgl.utils.StaticSystem;
+import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.core.event.CollisionEvent;
+import de.edgelord.saltyengine.cosmetic.Animation;
+import de.edgelord.saltyengine.cosmetic.Spritesheet;
+import de.edgelord.saltyengine.factory.ImageFactory;
+import de.edgelord.saltyengine.gameobject.GameObject;
+import de.edgelord.saltyengine.gameobject.components.SimplePhysicsComponent;
+import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
+import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.utils.Directions;
+import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.EndScene;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
 public class Player extends GameObject {
 
@@ -82,24 +79,12 @@ public class Player extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        for (TouchingEvent touchingEvent : getTouchingEvents()){
-            System.out.println(touchingEvent.getCollisionEvent().getRoot());
-        }
-
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")){
-
-            for (TouchingEvent gameObject : getTouchingEvents()){
-                if (gameObject.getCollisionEvent().getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")){
-                    VerticalWall wall = (VerticalWall) e.getRoot();
-        }
-            }
-
-            if (EscapeTheJunk.currentWallDelta >= 875) {
-                if (secureTicks > 10) {
+        if (EscapeTheJunk.currentWallDelta >= 764.5) {
+            if (secureTicks > 10) {
                     StaticSystem.currentScene = new EndScene(false);
-                }
             }
         }
+
     }
 
     public void onFixedTick() {
@@ -178,10 +163,8 @@ public class Player extends GameObject {
             ticks = 0;
         }
 
-        if (StaticSystem.input != null) {
-            if (StaticSystem.input.getKeyCode() == KeyEvent.VK_SPACE) {
-                shoot();
-            }
+        if (StaticSystem.keyboardInput.isSpace()) {
+            shoot();
         }
     }
 

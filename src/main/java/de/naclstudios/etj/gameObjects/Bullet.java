@@ -1,10 +1,10 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.sjgl.core.event.CollisionEvent;
-import de.edgelord.sjgl.gameobject.GameObject;
-import de.edgelord.sjgl.location.Coordinates;
-import de.edgelord.sjgl.utils.Directions;
-import de.edgelord.sjgl.utils.StaticSystem;
+import de.edgelord.saltyengine.core.event.CollisionEvent;
+import de.edgelord.saltyengine.gameobject.GameObject;
+import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.utils.Directions;
+import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.*;

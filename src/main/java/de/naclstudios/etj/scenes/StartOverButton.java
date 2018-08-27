@@ -1,8 +1,8 @@
 package de.naclstudios.etj.scenes;
 
-import de.edgelord.sjgl.core.Game;
-import de.edgelord.sjgl.ui.elements.Button;
-import de.edgelord.sjgl.utils.StaticSystem;
+import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.ui.elements.Button;
+import de.edgelord.saltyengine.utils.StaticSystem;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

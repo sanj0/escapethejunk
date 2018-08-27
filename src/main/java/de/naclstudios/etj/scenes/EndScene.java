@@ -1,9 +1,8 @@
 package de.naclstudios.etj.scenes;
 
 
-import de.edgelord.sjgl.scene.Scene;
-import de.edgelord.sjgl.ui.UISystem;
-import de.naclstudios.etj.gameObjects.DrawBackground;
+import de.edgelord.saltyengine.scene.Scene;
+import de.edgelord.saltyengine.ui.UISystem;
 
 public class EndScene extends Scene {
 
