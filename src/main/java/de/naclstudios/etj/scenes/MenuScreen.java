@@ -3,6 +3,7 @@ package de.naclstudios.etj.scenes;
 import de.edgelord.saltyengine.audio.AudioSystem;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.factory.ImageFactory;
+import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
 import de.edgelord.saltyengine.location.Coordinates;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.Scene;
@@ -10,6 +11,7 @@ import de.edgelord.saltyengine.ui.UISystem;
 import de.edgelord.saltyengine.ui.elements.TexturedButton;
 import de.edgelord.saltyengine.utils.StaticSystem;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
@@ -44,7 +46,19 @@ public class MenuScreen extends Scene {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
-                StaticSystem.currentScene = new GameScene();
+                SceneFade sceneFade = new SceneFade(this, "fadeOut", SceneFade.Mode.FADE_OUT, Color.white) {
+                    @Override
+                    public void onFadeFinish() {
+                        StaticSystem.currentScene = new GameScene();
+
+                        getParent().removeComponent(getName());
+                    }
+                };
+                sceneFade.setDuration(350);
+                this.addComponent(sceneFade);
+
+                sceneFade.fadeInit();
+                sceneFade.startGFX();
             }
         };
 
@@ -52,7 +66,17 @@ public class MenuScreen extends Scene {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
-                System.exit(0);
+                SceneFade sceneFade = new SceneFade(this, "fadeOut", SceneFade.Mode.FADE_OUT) {
+                    @Override
+                    public void onFadeFinish() {
+                        System.exit(0);
+                    }
+                };
+                sceneFade.setDuration(350);
+                this.addComponent(sceneFade);
+
+                sceneFade.fadeInit();
+                sceneFade.startGFX();
             }
         };
 

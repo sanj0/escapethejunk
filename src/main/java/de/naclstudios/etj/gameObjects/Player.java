@@ -7,6 +7,7 @@ import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.SimplePhysicsComponent;
+import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
 import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.location.Coordinates;
 import de.edgelord.saltyengine.resource.InnerResource;
@@ -14,10 +15,12 @@ import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.EndScene;
+import de.naclstudios.etj.scenes.GameScene;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
+import static java.awt.Color.orange;
 
 public class Player extends GameObject {
 
@@ -65,6 +68,8 @@ public class Player extends GameObject {
     public Player() {
         super(Game.getDisplayManager().getCenter(71, 91), 71, 91, "de.naclstudios.etj.gameObject.player");
 
+        fadeSceneIn();
+
         animationRender.setTicksPerFrame((int) (175 / StaticSystem.fixedTickMillis));
 
         // removeComponent(DEFAULT_PHYSICS_NAME);
@@ -72,6 +77,16 @@ public class Player extends GameObject {
         addComponent(animationRender);
         currentDirection = Directions.Direction.DOWN;
         readAnimation();
+    }
+
+    private void fadeSceneIn() {
+
+        SceneFade sceneFade = new SceneFade(this, "fadeIn", SceneFade.Mode.FADE_IN, new Color(176, 100, 29));
+        sceneFade.setDuration(750);
+        sceneFade.fadeInit();
+        sceneFade.startGFX();
+
+        this.addComponent(sceneFade);
     }
 
     public void initialize() {
