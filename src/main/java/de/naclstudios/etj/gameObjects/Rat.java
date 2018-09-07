@@ -6,14 +6,14 @@ import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
-import de.edgelord.saltyengine.gameobject.components.rendering.RectangleRender;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Coordinates;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
-import java.awt.*;
 import java.util.Random;
 
 public class Rat extends GameObject {
@@ -29,8 +29,8 @@ public class Rat extends GameObject {
 
     private AnimationRender render = new AnimationRender(this, "animaitonRender");
 
-    public Rat(Coordinates coordinates) {
-        super(coordinates, 56, 28, "de.naclstudios.etj.gameObjects.rat");
+    public Rat(Vector2f position) {
+        super(position, 56, 28, "de.naclstudios.etj.gameObjects.rat");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
 
@@ -71,13 +71,13 @@ public class Rat extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
     }
 
     private void spawnKey(){
 
-        StaticSystem.currentScene.addGameObject(new KeyFragment(getCoordinates()));
+        StaticSystem.currentScene.addGameObject(new KeyFragment(getPosition()));
     }
 
     private void runAway(){

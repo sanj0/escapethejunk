@@ -9,8 +9,10 @@ import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.SimplePhysicsComponent;
 import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
 import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
@@ -187,11 +189,11 @@ public class Player extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
         if (freeze) {
             animationRender.disable();
-            graphics2D.drawImage(currentFreezeImage, getCoordinates().getX(), getCoordinates().getY(), getWidth(), getHeight(), null);
+            graphics.drawImage(currentFreezeImage, getX(), getY(), getWidth(), getHeight());
         } else {
             animationRender.enable();
         }
@@ -205,18 +207,18 @@ public class Player extends GameObject {
 
             if (currentDirection == null){
 
-                StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
+                StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
             } else {
                 switch (currentDirection){
 
 
-                    case RIGHT: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 25, getCoordinates().getY() + 53), Directions.Direction.RIGHT));
+                    case RIGHT: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
                         break;
-                    case LEFT: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 25, getCoordinates().getY() + 53), Directions.Direction.LEFT));
+                    case LEFT: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
                         break;
-                    case   UP: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.UP));
+                    case   UP: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.UP));
                         break;
-                    case DOWN: StaticSystem.currentScene.addGameObject(new Bullet(new Coordinates(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
+                    case DOWN: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
                         break;
                 }
             }

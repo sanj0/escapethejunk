@@ -1,8 +1,8 @@
 package de.naclstudios.etj.scenes;
 
 import de.edgelord.saltyengine.core.Game;
-import de.edgelord.saltyengine.location.Coordinates;
 import de.edgelord.saltyengine.scene.Scene;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.naclstudios.etj.gameObjects.*;
 import de.naclstudios.etj.main.EscapeTheJunk;
@@ -21,7 +21,7 @@ public class GameScene extends Scene {
         player = new Player();
 
         addGameObject(player);
-        addGameObject(new Weapon(new Coordinates(Game.getDisplayManager().getHorizontalCenter(72) + 100, Game.getDisplayManager().getVerticalCenter(65))));
+        addGameObject(new Weapon(new Vector2f(Game.getDisplayManager().getHorizontalCenter(72) + 100, Game.getDisplayManager().getVerticalCenter(65))));
 
         addRats();
         addJunk();
@@ -50,47 +50,47 @@ public class GameScene extends Scene {
         /*
         There would normally be a for or while...
          */
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
     }
 
     private void addJunk(){
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new JunkHill(new Coordinates(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
     }
 }

@@ -3,8 +3,9 @@ package de.naclstudios.etj.gameObjects;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ public class HorizontalWall extends GameObject {
     private BufferedImage image;
 
     public HorizontalWall(Directions.Direction direction) {
-        super(new Coordinates(0, 0), 1600, 100, "de.naclstudios.etj.gameObjects.horizontalWall");
+        super(new Vector2f(0, 0), 1600, 100, "de.naclstudios.etj.gameObjects.horizontalWall");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
 
@@ -45,8 +46,8 @@ public class HorizontalWall extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
-        graphics2D.drawImage(image, getCoordinates().getX(), getCoordinates().getY(), getWidth(), getHeight(), null);
+        graphics.drawImage(image, getX(), getY(), getWidth(), getHeight());
     }
 }

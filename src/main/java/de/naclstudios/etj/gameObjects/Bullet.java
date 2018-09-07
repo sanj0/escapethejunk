@@ -2,7 +2,9 @@ package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.transform.Coordinates;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
@@ -23,8 +25,8 @@ public class Bullet extends GameObject {
     private Directions.Direction direction;
     private boolean deprecated = false;
 
-    public Bullet(Coordinates coordinates, Directions.Direction direction) {
-        super(coordinates, 12, 7, "de.naclstudios.etj.gameObjects.bullet");
+    public Bullet(Vector2f position, Directions.Direction direction) {
+        super(position, 12, 7, "de.naclstudios.etj.gameObjects.bullet");
 
         this.direction = direction;
 
@@ -76,11 +78,11 @@ public class Bullet extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
         if (!isDeprecated()) {
-            graphics2D.setColor(color);
-            graphics2D.fillOval(getCoordinates().getX(), getCoordinates().getY(), getWidth(), getHeight());
+            graphics.setColor(color);
+            graphics.fillOval(getX(), getY(), getWidth(), getHeight());
         }
     }
 

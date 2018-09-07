@@ -4,9 +4,9 @@ import de.edgelord.saltyengine.audio.AudioSystem;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
-import de.edgelord.saltyengine.location.Coordinates;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.Scene;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.ui.UISystem;
 import de.edgelord.saltyengine.ui.elements.TexturedButton;
 import de.edgelord.saltyengine.utils.StaticSystem;
@@ -42,7 +42,7 @@ public class MenuScreen extends Scene {
 
     private void addUI() {
 
-        TexturedButton playButton = new TexturedButton("play", new Coordinates(Game.getDisplayManager().getHorizontalCenter(450), 200), 450, 276, playButtonTexture) {
+        TexturedButton playButton = new TexturedButton("play", new Vector2f(Game.getDisplayManager().getHorizontalCenter(450), 200), 450, 276, playButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
@@ -50,8 +50,6 @@ public class MenuScreen extends Scene {
                     @Override
                     public void onFadeFinish() {
                         StaticSystem.currentScene = new GameScene();
-
-                        getParent().removeComponent(getName());
                     }
                 };
                 sceneFade.setDuration(350);
@@ -62,7 +60,7 @@ public class MenuScreen extends Scene {
             }
         };
 
-        TexturedButton exitutton = new TexturedButton("exit", new Coordinates(Game.getDisplayManager().getHorizontalCenter(280), 600), 280, 156, exitButtonTexture) {
+        TexturedButton exitutton = new TexturedButton("exit", new Vector2f(Game.getDisplayManager().getHorizontalCenter(280), 600), 280, 156, exitButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 

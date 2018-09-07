@@ -5,8 +5,9 @@ import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.rendering.ImageRender;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.scenes.EndScene;
 import de.naclstudios.etj.scenes.GameScene;
@@ -20,7 +21,7 @@ public class Door extends GameObject {
     private ImageRender render = new ImageRender(this, "de.naclstudios.gameObjects.door.imageRender", image.getSubimage(0, 0, 204, 87));
 
     public Door() {
-        super(new Coordinates(Game.getDisplayManager().getHorizontalCenter(204), 25), 204, 87, "de.naclstudios.etj.gameObject.door");
+        super(new Vector2f(Game.getDisplayManager().getHorizontalCenter(204), 25), 204, 87, "de.naclstudios.etj.gameObject.door");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
 
@@ -51,10 +52,10 @@ public class Door extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
-        graphics2D.setColor(Color.yellow);
-        graphics2D.drawRect(10, 10, 195, 30);
-        graphics2D.fillRect(10, 10, (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
+        graphics.setColor(Color.yellow);
+        graphics.drawRect(10, 10, 195, 30);
+        graphics.fillRect(10, 10, (float) (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
     }
 }

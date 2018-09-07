@@ -6,12 +6,12 @@ import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Coordinates;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.scenes.GameScene;
-
-import java.awt.*;
 
 public class Weapon extends GameObject {
 
@@ -20,8 +20,8 @@ public class Weapon extends GameObject {
     private Animation animation = new Animation(this);
     private AnimationRender animationRender = new AnimationRender(this, "de.naclstudios.etj.gameObjects.weapon.animationRender", animation, (int) (175 * StaticSystem.fixedTickMillis));
 
-    public Weapon(Coordinates coordinates) {
-        super(coordinates, 72, 65, "de.naclstudios.etj.gameObjects.weapon");
+    public Weapon(Vector2f position) {
+        super(position, 72, 65, "de.naclstudios.etj.gameObjects.weapon");
 
         animation.setFrames(spritesheet.getManualFrames(new Coordinates(1, 1), new Coordinates(2, 1)));
 
@@ -50,7 +50,7 @@ public class Weapon extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
     }
 }

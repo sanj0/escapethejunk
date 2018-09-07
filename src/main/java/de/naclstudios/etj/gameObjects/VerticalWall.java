@@ -4,15 +4,14 @@ import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.rendering.ImageRender;
-import de.edgelord.saltyengine.location.Coordinates;
-import de.edgelord.saltyengine.location.Vector2f;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.GameScene;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class VerticalWall extends GameObject {
@@ -25,7 +24,7 @@ public class VerticalWall extends GameObject {
     private int ticks = 0;
 
     public VerticalWall(Directions.Direction direction) {
-        super(new Coordinates(0, 0), 950, 950, "de.naclstudios.etj.gameObjects.wall");
+        super(new Vector2f(0, 0), 950, 950, "de.naclstudios.etj.gameObjects.wall");
 
         this.direction = direction;
 
@@ -70,7 +69,7 @@ public class VerticalWall extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
     }
 

@@ -2,9 +2,9 @@ package de.naclstudios.etj.scenes;
 
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.DrawingRoutine;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MenuBackGround extends DrawingRoutine {
@@ -15,8 +15,8 @@ public class MenuBackGround extends DrawingRoutine {
         super(DrawingPosition.BEFORE_GAMEOBJECTS);
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
-        graphics2D.drawImage(image, 0, 0, 1600, 950, null);
+        graphics.drawImage(image, 0, 0, 1600, 950);
     }
 }

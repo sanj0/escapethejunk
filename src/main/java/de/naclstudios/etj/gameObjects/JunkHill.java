@@ -4,8 +4,9 @@ import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.gameobject.components.rendering.ImageRender;
-import de.edgelord.saltyengine.location.Coordinates;
+import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
@@ -22,8 +23,8 @@ public class JunkHill extends GameObject {
 
     private int hitCounter = 0;
 
-    public JunkHill(Coordinates coordinates) {
-        super(coordinates, 147, 132, "de.naclstudios.etj.gameObjects.junkHill");
+    public JunkHill(Vector2f position) {
+        super(position, 147, 132, "de.naclstudios.etj.gameObjects.junkHill");
 
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
@@ -57,7 +58,7 @@ public class JunkHill extends GameObject {
 
     }
 
-    public void draw(Graphics2D graphics2D) {
+    public void draw(SaltyGraphics graphics) {
 
     }
 
