@@ -41,6 +41,6 @@ public class EndSceneTextPanel extends GameObject {
 
         int width = fontMetrics.stringWidth(message);
 
-        graphics.drawText(message, Game.getDisplayManager().getHorizontalCenter(width), 300);
+        graphics.drawText(message, Game.getHost().getHorizontalCentrePosition(width), 300);
     }
 }

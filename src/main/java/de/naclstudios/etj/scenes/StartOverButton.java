@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 public class StartOverButton extends Button {
 
     public StartOverButton() {
-        super("Try again!", Game.getDisplayManager().getCenter(300, 100), 300, 100);
+        super("Try again!", Game.getHost().getCentrePosition(300, 100), 300, 100);
 
 
         setFont(getFont().deriveFont(30f));

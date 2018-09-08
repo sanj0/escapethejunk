@@ -21,7 +21,7 @@ public class GameScene extends Scene {
         player = new Player();
 
         addGameObject(player);
-        addGameObject(new Weapon(new Vector2f(Game.getDisplayManager().getHorizontalCenter(72) + 100, Game.getDisplayManager().getVerticalCenter(65))));
+        addGameObject(new Weapon(new Vector2f(Game.getHost().getHorizontalCentrePosition(72) + 100, Game.getHost().getVerticalCentrePosition(65))));
 
         addRats();
         addJunk();

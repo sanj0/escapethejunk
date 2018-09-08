@@ -21,7 +21,7 @@ public class Door extends GameObject {
     private ImageRender render = new ImageRender(this, "de.naclstudios.gameObjects.door.imageRender", image.getSubimage(0, 0, 204, 87));
 
     public Door() {
-        super(new Vector2f(Game.getDisplayManager().getHorizontalCenter(204), 25), 204, 87, "de.naclstudios.etj.gameObject.door");
+        super(new Vector2f(Game.getHost().getHorizontalCentrePosition(204), 25), 204, 87, "de.naclstudios.etj.gameObject.door");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
 

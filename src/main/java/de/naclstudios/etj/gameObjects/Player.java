@@ -17,12 +17,10 @@ import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.EndScene;
-import de.naclstudios.etj.scenes.GameScene;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static java.awt.Color.orange;
 
 public class Player extends GameObject {
 
@@ -68,7 +66,7 @@ public class Player extends GameObject {
     private int secureTicks = 0;
 
     public Player() {
-        super(Game.getDisplayManager().getCenter(71, 91), 71, 91, "de.naclstudios.etj.gameObject.player");
+        super(Game.getHost().getCentrePosition(71, 91), 71, 91, "de.naclstudios.etj.gameObject.player");
 
         fadeSceneIn();
 

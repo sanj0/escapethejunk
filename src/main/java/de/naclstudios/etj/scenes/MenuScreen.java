@@ -42,7 +42,7 @@ public class MenuScreen extends Scene {
 
     private void addUI() {
 
-        TexturedButton playButton = new TexturedButton("play", new Vector2f(Game.getDisplayManager().getHorizontalCenter(450), 200), 450, 276, playButtonTexture) {
+        TexturedButton playButton = new TexturedButton("play", new Vector2f(Game.getHost().getHorizontalCentrePosition(450), 200), 450, 276, playButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
@@ -60,7 +60,7 @@ public class MenuScreen extends Scene {
             }
         };
 
-        TexturedButton exitutton = new TexturedButton("exit", new Vector2f(Game.getDisplayManager().getHorizontalCenter(280), 600), 280, 156, exitButtonTexture) {
+        TexturedButton exitutton = new TexturedButton("exit", new Vector2f(Game.getHost().getHorizontalCentrePosition(280), 600), 280, 156, exitButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
