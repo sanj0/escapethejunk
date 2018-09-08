@@ -33,6 +33,8 @@ public class MenuScreen extends Scene {
 
         addDrawingRoutin(new MenuBackGround());
 
+        audioSystem.setClipVolume("de.naclstudios.etj.music.menuMusic", 0.75f);
+
         audioSystem.loop("de.naclstudios.etj.music.menuMusic");
     }
 
