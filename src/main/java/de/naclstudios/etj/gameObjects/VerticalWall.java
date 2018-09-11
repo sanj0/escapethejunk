@@ -24,7 +24,7 @@ public class VerticalWall extends GameObject {
     private int ticks = 0;
 
     public VerticalWall(Directions.Direction direction) {
-        super(new Vector2f(0, 0), 950, 950, "de.naclstudios.etj.gameObjects.wall");
+        super(new Vector2f(-1000, -1000), 950, 950, "de.naclstudios.etj.gameObjects.wall");
 
         this.direction = direction;
 

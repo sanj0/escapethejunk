@@ -15,11 +15,11 @@ import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
-import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.EndScene;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 
 public class Player extends GameObject {
@@ -92,14 +92,31 @@ public class Player extends GameObject {
     public void initialize() {
     }
 
+    @Override
+    public void onCollisionDetectionFinish(List<CollisionEvent> collisions) {
+
+        int wallCount = 0;
+
+        for (CollisionEvent collisionEvent : collisions) {
+            if (collisionEvent.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")) {
+                wallCount++;
+            }
+        }
+
+        if (wallCount >= 2) {
+            StaticSystem.currentScene = new EndScene(false);
+        }
+    }
+
     public void onCollision(CollisionEvent e) {
 
+        /*
         if (EscapeTheJunk.currentWallDelta >= 764.5) {
             if (secureTicks > 10) {
                     StaticSystem.currentScene = new EndScene(false);
             }
         }
-
+        */
     }
 
     public void onFixedTick() {
