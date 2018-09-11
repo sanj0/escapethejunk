@@ -31,11 +31,11 @@ public class JunkHill extends GameObject {
 
         addComponent(imageRender);
 
-        getHitbox().setOffsetX(10);
-        getHitbox().setOffsetY(20);
+        getHitboxAsSimpleHitbox().setOffsetX(10);
+        getHitboxAsSimpleHitbox().setOffsetY(20);
 
-        getHitbox().setWidth(127);
-        getHitbox().setHeight(112);
+        getHitboxAsSimpleHitbox().setWidth(127);
+        getHitboxAsSimpleHitbox().setHeight(112);
     }
 
     public void initialize() {

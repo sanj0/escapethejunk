@@ -224,13 +224,13 @@ public class Player extends GameObject {
     }
 
     private void setSlimHitbox() {
-        getHitbox().setOffsetX(14);
-        getHitbox().setWidth(45);
+        getHitboxAsSimpleHitbox().setOffsetX(14);
+        getHitboxAsSimpleHitbox().setWidth(45);
     }
 
     private void setBigHitbox() {
-        getHitbox().setWidth(71);
-        getHitbox().setOffsetX(0);
+        getHitboxAsSimpleHitbox().setWidth(71);
+        getHitboxAsSimpleHitbox().setOffsetX(0);
     }
 
     public boolean isHasWeapon() {
