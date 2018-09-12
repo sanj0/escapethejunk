@@ -3,7 +3,6 @@ package de.naclstudios.etj.gameObjects;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
-import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
@@ -33,7 +32,7 @@ public class Bullet extends GameObject {
         removeComponent(DEFAULT_PHYSICS_NAME);
         // removeComponent(DEFAULT_PUSH_OUT_ON_COLLISION_NAME);
 
-        if (direction == Directions.Direction.UP || direction == Directions.Direction.DOWN){
+        if (direction == Directions.Direction.UP || direction == Directions.Direction.DOWN) {
             setWidth(7);
             setHeight(12);
         }
@@ -47,14 +46,14 @@ public class Bullet extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.junkHill")){
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.junkHill")) {
 
             JunkHill junkHill = (JunkHill) e.getRoot();
 
             junkHill.hitByBullet(this);
         }
 
-        if (!e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player") && !e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.keyFragment")){
+        if (!e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player") && !e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.keyFragment")) {
 
             StaticSystem.currentScene.getGameObjects().remove(this);
         }
@@ -66,7 +65,7 @@ public class Bullet extends GameObject {
             StaticSystem.currentScene.getGameObjects().remove(this);
         } else {
             float nextStep = velocity * StaticSystem.fixedTickMillis;
-            if (direction == null){
+            if (direction == null) {
             } else {
                 move(nextStep, direction);
                 delta += nextStep;

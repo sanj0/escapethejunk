@@ -34,10 +34,10 @@ public class Door extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
             Player player = (Player) e.getRoot();
 
-            if (player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS){
+            if (player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS) {
                 StaticSystem.currentScene = new EndScene(true);
                 System.out.println("You win!");
             }

@@ -37,7 +37,7 @@ public class GameScene extends Scene {
         addGameObject(new Door());
     }
 
-    private void addWalls(){
+    private void addWalls() {
 
         VerticalWall RIGHT = new VerticalWall(Directions.Direction.LEFT);
         VerticalWall LEFT = new VerticalWall(Directions.Direction.RIGHT);
@@ -46,7 +46,7 @@ public class GameScene extends Scene {
         addGameObject(LEFT);
     }
 
-    private void addRats(){
+    private void addRats() {
         /*
         There would normally be a for or while...
          */
@@ -69,7 +69,7 @@ public class GameScene extends Scene {
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
     }
 
-    private void addJunk(){
+    private void addJunk() {
         addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new JunkHill(new Vector2f(random.nextInt(1600), random.nextInt(950))));

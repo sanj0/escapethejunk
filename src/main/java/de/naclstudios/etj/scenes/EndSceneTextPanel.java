@@ -12,7 +12,7 @@ public class EndSceneTextPanel extends GameObject {
     private String message;
 
     public EndSceneTextPanel(String message) {
-        super(0,0, 0, 0, "text");
+        super(0, 0, 0, 0, "text");
 
         this.message = message;
     }

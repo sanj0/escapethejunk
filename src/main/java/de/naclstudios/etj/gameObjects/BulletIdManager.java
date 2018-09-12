@@ -9,7 +9,7 @@ public class BulletIdManager {
     private static List<Integer> ids = new LinkedList<Integer>();
     private static Random idGenerator = new Random();
 
-    public static int getNewId(){
+    public static int getNewId() {
 
         int id = idGenerator.nextInt();
         boolean readyToReturn = false;

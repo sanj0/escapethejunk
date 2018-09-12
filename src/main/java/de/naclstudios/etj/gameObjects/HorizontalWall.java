@@ -8,7 +8,6 @@ import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class HorizontalWall extends GameObject {
@@ -20,11 +19,11 @@ public class HorizontalWall extends GameObject {
 
         removeComponent(DEFAULT_PHYSICS_NAME);
 
-        if (direction == Directions.Direction.DOWN){
+        if (direction == Directions.Direction.DOWN) {
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_down.png");
         }
 
-        if (direction == Directions.Direction.UP){
+        if (direction == Directions.Direction.UP) {
             setY(850);
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_up.png");
         }

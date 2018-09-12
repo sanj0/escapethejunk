@@ -46,20 +46,20 @@ public class Rat extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.bullet")){
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.bullet")) {
             health--;
         }
     }
 
     public void onFixedTick() {
 
-        if (health <= 0){
+        if (health <= 0) {
             EscapeTheJunk.sounds.play("rat_dies");
             spawnKey();
             StaticSystem.currentScene.getGameObjects().remove(this);
         }
 
-        if (ticks == 50){
+        if (ticks == 50) {
             ticks = 0;
             runAway();
         } else {
@@ -75,30 +75,30 @@ public class Rat extends GameObject {
 
     }
 
-    private void spawnKey(){
+    private void spawnKey() {
 
         StaticSystem.currentScene.addGameObject(new KeyFragment(getPosition()));
     }
 
-    private void runAway(){
+    private void runAway() {
 
         int randomDir = random.nextInt(4);
 
-        if (randomDir == 0){
+        if (randomDir == 0) {
             if (getPosition().getY() >= 105) {
                 move(15f, Directions.Direction.UP);
                 return;
             }
         }
 
-        if (randomDir == 1){
+        if (randomDir == 1) {
             if (getPosition().getY() <= 840) {
                 move(15f, Directions.Direction.DOWN);
                 return;
             }
         }
 
-        if (randomDir == 2){
+        if (randomDir == 2) {
             if (getPosition().getX() <= 1600 - EscapeTheJunk.currentWallDelta) {
                 render.setAnimation(walkRight);
                 move(15f, Directions.Direction.RIGHT);
@@ -106,7 +106,7 @@ public class Rat extends GameObject {
             }
         }
 
-        if (randomDir == 3){
+        if (randomDir == 3) {
             if (getPosition().getX() >= EscapeTheJunk.currentWallDelta) {
                 render.setAnimation(walkLeft);
                 move(15f, Directions.Direction.LEFT);

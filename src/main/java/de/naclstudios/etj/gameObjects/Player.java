@@ -10,8 +10,8 @@ import de.edgelord.saltyengine.gameobject.components.SimplePhysicsComponent;
 import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
 import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
-import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
@@ -186,11 +186,11 @@ public class Player extends GameObject {
             }
         }
 
-        if (cooldown){
+        if (cooldown) {
             ticks++;
         }
 
-        if (ticks == weaponCooldown){
+        if (ticks == weaponCooldown) {
             cooldown = false;
             ticks = 0;
         }
@@ -220,20 +220,24 @@ public class Player extends GameObject {
 
             cooldown = true;
 
-            if (currentDirection == null){
+            if (currentDirection == null) {
 
                 StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
             } else {
-                switch (currentDirection){
+                switch (currentDirection) {
 
 
-                    case RIGHT: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
+                    case RIGHT:
+                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
                         break;
-                    case LEFT: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
+                    case LEFT:
+                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
                         break;
-                    case   UP: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.UP));
+                    case UP:
+                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.UP));
                         break;
-                    case DOWN: StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
+                    case DOWN:
+                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
                         break;
                 }
             }
@@ -257,7 +261,7 @@ public class Player extends GameObject {
     public void setHasWeapon(boolean hasWeapon) {
         this.hasWeapon = hasWeapon;
 
-        if (hasWeapon){
+        if (hasWeapon) {
             walkUp.setFrames(mainCharSpriteSheet.getManualFrames(walkUpSpritesWeapon));
             walkDown.setFrames(mainCharSpriteSheet.getManualFrames(walkDownSpritesWeapon));
             walkLeft.setFrames(mainCharSpriteSheet.getManualFrames(walkLeftSpritesWeapon));

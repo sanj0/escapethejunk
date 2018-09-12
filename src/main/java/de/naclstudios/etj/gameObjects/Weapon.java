@@ -36,10 +36,10 @@ public class Weapon extends GameObject {
 
     public void onCollision(CollisionEvent collisionEvent) {
 
-            if (collisionEvent.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
-                GameScene.player.setHasWeapon(true);
-                StaticSystem.currentScene.getGameObjects().remove(this);
-            }
+        if (collisionEvent.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
+            GameScene.player.setHasWeapon(true);
+            StaticSystem.currentScene.getGameObjects().remove(this);
+        }
     }
 
     public void onFixedTick() {

@@ -10,7 +10,6 @@ import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class JunkHill extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")){
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")) {
             EscapeTheJunk.sounds.play("junk_destroyed");
             StaticSystem.currentScene.getGameObjects().remove(this);
         }
@@ -62,10 +61,10 @@ public class JunkHill extends GameObject {
 
     }
 
-    public void hitByBullet(Bullet bullet){
+    public void hitByBullet(Bullet bullet) {
 
-        for (int i : hittenByIds){
-            if (bullet.getId() == i){
+        for (int i : hittenByIds) {
+            if (bullet.getId() == i) {
                 return;
             }
         }
@@ -74,13 +73,13 @@ public class JunkHill extends GameObject {
 
         hitCounter++;
 
-        if (hitCounter >= 3){
+        if (hitCounter >= 3) {
             EscapeTheJunk.sounds.play("junk_destroyed");
             removeFromScene();
         }
     }
 
-    private void removeFromScene(){
+    private void removeFromScene() {
         StaticSystem.currentScene.getGameObjects().remove(this);
     }
 }

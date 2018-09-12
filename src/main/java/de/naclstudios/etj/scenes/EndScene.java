@@ -6,11 +6,11 @@ import de.edgelord.saltyengine.ui.UISystem;
 
 public class EndScene extends Scene {
 
-    public EndScene(boolean won){
+    public EndScene(boolean won) {
 
         addDrawingRoutin(new EndScreen());
 
-        if (won){
+        if (won) {
             addGameObject(new EndSceneTextPanel("You escaped the junk! Thanks for playing!"));
         } else {
             addGameObject(new EndSceneTextPanel("Unfortunately, you died! Try it again!"));

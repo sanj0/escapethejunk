@@ -28,10 +28,10 @@ public class VerticalWall extends GameObject {
 
         this.direction = direction;
 
-        if (direction == Directions.Direction.LEFT){
+        if (direction == Directions.Direction.LEFT) {
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_right.png");
             setPosition(new Vector2f(1423, 0));
-        } else if (direction == Directions.Direction.RIGHT){
+        } else if (direction == Directions.Direction.RIGHT) {
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_left.png");
             setPosition(new Vector2f(-773, 0));
         }
@@ -47,7 +47,7 @@ public class VerticalWall extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
             GameScene.player.move(12.5f, direction);
         }
     }
@@ -73,14 +73,14 @@ public class VerticalWall extends GameObject {
 
     }
 
-    public void makeMove(float delta){
+    public void makeMove(float delta) {
 
         if (direction == Directions.Direction.RIGHT) {
             if (GameScene.player.getX() <= (getX() + getWidth() + delta)) {
                 GameScene.player.move(50f, direction);
             }
         } else {
-            if (GameScene.player.getX() >= getX() + delta){
+            if (GameScene.player.getX() >= getX() + delta) {
                 GameScene.player.move(-50f, direction);
             }
         }

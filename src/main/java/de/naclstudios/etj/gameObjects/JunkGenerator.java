@@ -22,7 +22,7 @@ public class JunkGenerator implements FixedTask {
         int min = (int) EscapeTheJunk.currentWallDelta;
         int maxX = (int) (1600 - EscapeTheJunk.currentWallDelta);
 
-        if (ticks == spawnRate * StaticSystem.fixedTickMillis){
+        if (ticks == spawnRate * StaticSystem.fixedTickMillis) {
             if (maxX - min > 0) {
                 StaticSystem.currentScene.getGameObjects().add(StaticSystem.currentScene.getGameObjects().size() - 5, new JunkHill(new Vector2f(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
             }

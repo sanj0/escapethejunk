@@ -30,7 +30,7 @@ public class KeyFragment extends GameObject {
 
     public void onCollision(CollisionEvent e) {
 
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")){
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
 
             EscapeTheJunk.sounds.play("key_collected");
             Player player = (Player) e.getRoot();
