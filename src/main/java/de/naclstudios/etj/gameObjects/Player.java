@@ -31,7 +31,7 @@ public class Player extends GameObject {
 
     private AnimationRender animationRender = new AnimationRender(this, "de.naclstudios.etj.gameObjects.player.animationRender");
 
-    private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 143, 184);
+    private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 71, 93);
 
     private Animation walkUp = new Animation(this);
     private Animation walkDown = new Animation(this);

@@ -15,9 +15,9 @@ public class EscapeTheJunk extends Game {
     }
 
     public static void main(String[] args) {
-        EscapeTheJunk escapeTheJunk = new EscapeTheJunk(1);
+        EscapeTheJunk escapeTheJunk = new EscapeTheJunk(10);
 
-        start(60);
+        start();
         StaticSystem.drawFPS = false;
         StaticSystem.currentScene = new MenuScreen();
 
