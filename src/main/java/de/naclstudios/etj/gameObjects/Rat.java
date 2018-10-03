@@ -1,11 +1,11 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.saltyengine.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.cosmetic.Animation;
 import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Coordinates;

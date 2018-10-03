@@ -1,14 +1,14 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.saltyengine.components.SimplePhysicsComponent;
+import de.edgelord.saltyengine.components.gfx.SceneFade;
+import de.edgelord.saltyengine.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.cosmetic.Animation;
 import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.gameobject.components.SimplePhysicsComponent;
-import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
-import de.edgelord.saltyengine.gameobject.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Coordinates;
@@ -127,7 +127,7 @@ public class Player extends GameObject {
             secureTicks++;
         }
 
-        if (StaticSystem.inputUp) {
+        if (Game.inputUp) {
 
             currentDirection = Directions.Direction.UP;
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setVelocity(0.35f);
@@ -136,7 +136,7 @@ public class Player extends GameObject {
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setVelocity(0f);
         }
 
-        if (StaticSystem.inputDown) {
+        if (Game.inputDown) {
             currentDirection = Directions.Direction.DOWN;
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setVelocity(0.35f);
             freeze = false;
@@ -144,7 +144,7 @@ public class Player extends GameObject {
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setVelocity(0f);
         }
 
-        if (StaticSystem.inputRight) {
+        if (Game.inputRight) {
             currentDirection = Directions.Direction.RIGHT;
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setVelocity(0.35f);
             freeze = false;
@@ -152,7 +152,7 @@ public class Player extends GameObject {
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setVelocity(0f);
         }
 
-        if (StaticSystem.inputLeft) {
+        if (Game.inputLeft) {
             currentDirection = Directions.Direction.LEFT;
             getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setVelocity(0.35f);
             freeze = false;
@@ -195,7 +195,7 @@ public class Player extends GameObject {
             ticks = 0;
         }
 
-        if (StaticSystem.keyboardInput.isSpace()) {
+        if (Game.keyboardInput.isSpace()) {
             shoot();
         }
     }

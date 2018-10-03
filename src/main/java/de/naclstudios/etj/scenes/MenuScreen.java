@@ -1,9 +1,9 @@
 package de.naclstudios.etj.scenes;
 
 import de.edgelord.saltyengine.audio.AudioSystem;
+import de.edgelord.saltyengine.components.gfx.SceneFade;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.factory.ImageFactory;
-import de.edgelord.saltyengine.gameobject.components.gfx.SceneFade;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.Scene;
 import de.edgelord.saltyengine.transform.Vector2f;
