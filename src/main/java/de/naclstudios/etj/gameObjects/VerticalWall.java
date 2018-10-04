@@ -50,6 +50,11 @@ public class VerticalWall extends GameObject {
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
             GameScene.player.move(12.5f, direction);
         }
+
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.junkHill")) {
+            EscapeTheJunk.sounds.play("junk_destroyed");
+            StaticSystem.currentScene.getGameObjects().remove(e.getRoot());
+        }
     }
 
     public void onFixedTick() {

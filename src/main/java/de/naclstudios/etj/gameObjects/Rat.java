@@ -38,6 +38,8 @@ public class Rat extends GameObject {
         walkLeft.setFrames(spritesheet.getManualFrames(new Coordinates(2, 1), new Coordinates(2, 2), new Coordinates(2, 1), new Coordinates(2, 3)));
 
         addComponent(render);
+
+        setStationary(true);
     }
 
     public void initialize() {
@@ -45,10 +47,6 @@ public class Rat extends GameObject {
     }
 
     public void onCollision(CollisionEvent e) {
-
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.bullet")) {
-            health--;
-        }
     }
 
     public void onFixedTick() {
@@ -112,5 +110,9 @@ public class Rat extends GameObject {
                 move(15f, Directions.Direction.LEFT);
             }
         }
+    }
+
+    public void bulletHit() {
+        health--;
     }
 }

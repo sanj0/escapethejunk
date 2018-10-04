@@ -35,6 +35,8 @@ public class JunkHill extends GameObject {
 
         getHitboxAsSimpleHitbox().setWidth(127);
         getHitboxAsSimpleHitbox().setHeight(112);
+
+        setStationary(true);
     }
 
     public void initialize() {
@@ -42,11 +44,6 @@ public class JunkHill extends GameObject {
     }
 
     public void onCollision(CollisionEvent e) {
-
-        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")) {
-            EscapeTheJunk.sounds.play("junk_destroyed");
-            StaticSystem.currentScene.getGameObjects().remove(this);
-        }
     }
 
     public void onFixedTick() {

@@ -28,6 +28,7 @@ public class Weapon extends GameObject {
         addComponent(animationRender);
         // removeComponent(DEFAULT_PHYSICS_NAME);
         getPhysics().removeGravity();
+        setStationary(true);
     }
 
     public void initialize() {
@@ -36,10 +37,6 @@ public class Weapon extends GameObject {
 
     public void onCollision(CollisionEvent collisionEvent) {
 
-        if (collisionEvent.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player")) {
-            GameScene.player.setHasWeapon(true);
-            StaticSystem.currentScene.getGameObjects().remove(this);
-        }
     }
 
     public void onFixedTick() {

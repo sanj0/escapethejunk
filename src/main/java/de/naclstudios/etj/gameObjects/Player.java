@@ -16,6 +16,7 @@ import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.scenes.EndScene;
+import de.naclstudios.etj.scenes.GameScene;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -117,6 +118,11 @@ public class Player extends GameObject {
             }
         }
         */
+
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.weapon")) {
+            setHasWeapon(true);
+            StaticSystem.currentScene.getGameObjects().remove(e.getRoot());
+        }
     }
 
     public void onFixedTick() {

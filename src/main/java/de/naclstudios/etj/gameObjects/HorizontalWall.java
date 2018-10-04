@@ -27,6 +27,8 @@ public class HorizontalWall extends GameObject {
             setY(850);
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_up.png");
         }
+
+        setStationary(true);
     }
 
     public void initialize() {

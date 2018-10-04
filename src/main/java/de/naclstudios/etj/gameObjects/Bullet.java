@@ -57,6 +57,12 @@ public class Bullet extends GameObject {
 
             StaticSystem.currentScene.getGameObjects().remove(this);
         }
+
+        if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.rat")) {
+            Rat rat = (Rat) e.getRoot();
+
+            rat.bulletHit();
+        }
     }
 
     public void onFixedTick() {
