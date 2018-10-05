@@ -1,13 +1,12 @@
 package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.components.rendering.AnimationRender;
+import de.edgelord.saltyengine.core.ImageLoader;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.cosmetic.Animation;
 import de.edgelord.saltyengine.cosmetic.Spritesheet;
-import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
-import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
@@ -22,7 +21,7 @@ public class Rat extends GameObject {
     private int ticks = 0;
     private Random random = new Random();
 
-    private Spritesheet spritesheet = new Spritesheet(new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/rat.png"), 477, 235);
+    private Spritesheet spritesheet = new Spritesheet(ImageLoader.getOrLoadImage("rat","pictures/rat.png"), 477, 235);
 
     private Animation walkRight = new Animation(this);
     private Animation walkLeft = new Animation(this);

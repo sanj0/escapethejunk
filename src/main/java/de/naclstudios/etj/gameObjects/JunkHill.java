@@ -1,11 +1,10 @@
 package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.components.rendering.ImageRender;
+import de.edgelord.saltyengine.core.ImageLoader;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
-import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
-import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class JunkHill extends GameObject {
 
-    private BufferedImage image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/junk_hill.png");
+    private BufferedImage image = ImageLoader.getOrLoadImage("junkHill","pictures/junk_hill.png");
     private ImageRender imageRender = new ImageRender(this, "de.naclstudios.etj.gameObjects.trashHill.ovalRender", image);
     private List<Integer> hittenByIds = new LinkedList<Integer>();
 
