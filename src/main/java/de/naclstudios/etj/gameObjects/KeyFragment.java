@@ -7,7 +7,6 @@ import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Vector2f;
-import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.image.BufferedImage;
@@ -37,7 +36,7 @@ public class KeyFragment extends GameObject {
 
             player.setCollectedKeyFragments(player.getCollectedKeyFragments() + 1);
 
-            StaticSystem.currentScene.getGameObjects().remove(this);
+            removeFromCurrentScene();
         }
     }
 

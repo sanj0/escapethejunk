@@ -8,7 +8,7 @@ import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
-import de.edgelord.saltyengine.utils.StaticSystem;
+import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.GameScene;
 
@@ -53,14 +53,14 @@ public class VerticalWall extends GameObject {
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.junkHill")) {
             EscapeTheJunk.sounds.play("junk_destroyed");
-            StaticSystem.currentScene.getGameObjects().remove(e.getRoot());
+            e.getRoot().removeFromCurrentScene();
         }
     }
 
     public void onFixedTick() {
 
         if (move) {
-            if (ticks == 2500 / StaticSystem.fixedTickMillis) {
+            if (ticks == 2500 / SaltySystem.fixedTickMillis) {
                 makeMove(25f);
                 EscapeTheJunk.currentWallDelta += 12.5f;
                 ticks = 0;

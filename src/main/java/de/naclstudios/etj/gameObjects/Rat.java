@@ -7,10 +7,10 @@ import de.edgelord.saltyengine.cosmetic.Animation;
 import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
-import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.util.Random;
@@ -21,7 +21,7 @@ public class Rat extends GameObject {
     private int ticks = 0;
     private Random random = new Random();
 
-    private Spritesheet spritesheet = new Spritesheet(ImageLoader.getOrLoadImage("rat","pictures/rat.png"), 477, 235);
+    private Spritesheet spritesheet = new Spritesheet(ImageLoader.getOrLoadImage("rat", "pictures/rat.png"), 477, 235);
 
     private Animation walkRight = new Animation(this);
     private Animation walkLeft = new Animation(this);
@@ -53,7 +53,7 @@ public class Rat extends GameObject {
         if (health <= 0) {
             EscapeTheJunk.sounds.play("rat_dies");
             spawnKey();
-            StaticSystem.currentScene.getGameObjects().remove(this);
+            removeFromCurrentScene();
         }
 
         if (ticks == 50) {
@@ -73,8 +73,7 @@ public class Rat extends GameObject {
     }
 
     private void spawnKey() {
-
-        StaticSystem.currentScene.addGameObject(new KeyFragment(getPosition()));
+        SceneManager.getCurrentScene().addGameObject(new KeyFragment(getPosition()));
     }
 
     private void runAway() {

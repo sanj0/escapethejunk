@@ -6,7 +6,6 @@ import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.transform.Vector2f;
-import de.edgelord.saltyengine.utils.StaticSystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.image.BufferedImage;
@@ -15,9 +14,9 @@ import java.util.List;
 
 public class JunkHill extends GameObject {
 
-    private BufferedImage image = ImageLoader.getOrLoadImage("junkHill","pictures/junk_hill.png");
+    private BufferedImage image = ImageLoader.getOrLoadImage("junkHill", "pictures/junk_hill.png");
     private ImageRender imageRender = new ImageRender(this, "de.naclstudios.etj.gameObjects.trashHill.ovalRender", image);
-    private List<Integer> hittenByIds = new LinkedList<Integer>();
+    private List<Integer> hitByIds = new LinkedList<Integer>();
 
     private int hitCounter = 0;
 
@@ -25,7 +24,6 @@ public class JunkHill extends GameObject {
         super(position, 147, 132, "de.naclstudios.etj.gameObjects.junkHill");
 
         // removeComponent(DEFAULT_PHYSICS_NAME);
-        getPhysics().removeGravity();
 
         addComponent(imageRender);
 
@@ -59,23 +57,19 @@ public class JunkHill extends GameObject {
 
     public void hitByBullet(Bullet bullet) {
 
-        for (int i : hittenByIds) {
+        for (int i : hitByIds) {
             if (bullet.getId() == i) {
                 return;
             }
         }
 
-        hittenByIds.add(bullet.getId());
+        hitByIds.add(bullet.getId());
 
         hitCounter++;
 
         if (hitCounter >= 3) {
             EscapeTheJunk.sounds.play("junk_destroyed");
-            removeFromScene();
+            removeFromCurrentScene();
         }
-    }
-
-    private void removeFromScene() {
-        StaticSystem.currentScene.getGameObjects().remove(this);
     }
 }

@@ -1,7 +1,5 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.saltyengine.components.SimplePhysicsComponent;
-import de.edgelord.saltyengine.components.gfx.SceneFade;
 import de.edgelord.saltyengine.components.rendering.AnimationRender;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
@@ -10,16 +8,17 @@ import de.edgelord.saltyengine.cosmetic.Spritesheet;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.input.Input;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Coordinates;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
-import de.edgelord.saltyengine.utils.StaticSystem;
-import de.naclstudios.etj.scenes.EndScene;
-import de.naclstudios.etj.scenes.GameScene;
+import de.edgelord.saltyengine.utils.SaltySystem;
+import de.naclstudios.etj.main.EscapeTheJunk;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 
@@ -27,6 +26,8 @@ public class Player extends GameObject {
 
     private int collectedKeyFragments = 0;
     public static final int REQUIREDKEYFRAGMENTS = 13;
+
+    private float movementSpeed = 3000;
 
     private ImageFactory imageFactory = new ImageFactory(new InnerResource());
 
@@ -60,7 +61,7 @@ public class Player extends GameObject {
     private boolean freeze = true;
 
     private boolean hasWeapon = false;
-    private int weaponCooldown = (int) (350 * StaticSystem.fixedTickMillis);
+    private int weaponCooldown = (int) (350 * SaltySystem.fixedTickMillis);
     private boolean cooldown = false;
     private int ticks = 0;
 
@@ -69,25 +70,12 @@ public class Player extends GameObject {
     public Player() {
         super(Game.getHost().getCentrePosition(71, 91), 71, 91, "de.naclstudios.etj.gameObject.player");
 
-        fadeSceneIn();
-
-        animationRender.setTicksPerFrame((int) (175 / StaticSystem.fixedTickMillis));
+        animationRender.setTicksPerFrame((int) (175 / SaltySystem.fixedTickMillis));
 
         // removeComponent(DEFAULT_PHYSICS_NAME);
-        getPhysics().removeGravity();
         addComponent(animationRender);
         currentDirection = Directions.Direction.DOWN;
         readAnimation();
-    }
-
-    private void fadeSceneIn() {
-
-        SceneFade sceneFade = new SceneFade(this, "fadeIn", SceneFade.Mode.FADE_IN, new Color(176, 100, 29));
-        sceneFade.setDuration(750);
-        sceneFade.fadeInit();
-        sceneFade.startGFX();
-
-        this.addComponent(sceneFade);
     }
 
     public void initialize() {
@@ -105,65 +93,71 @@ public class Player extends GameObject {
         }
 
         if (wallCount >= 2) {
-            StaticSystem.currentScene = new EndScene(false);
+            EscapeTheJunk.lastGameWon = false;
+            try {
+                SceneManager.setCurrentScene("end");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    @Override
     public void onCollision(CollisionEvent e) {
 
         /*
         if (EscapeTheJunk.currentWallDelta >= 764.5) {
             if (secureTicks > 10) {
-                    StaticSystem.currentScene = new EndScene(false);
+                    SceneManager.getCurrentScene = new EndScene(false);
             }
         }
         */
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.weapon")) {
             setHasWeapon(true);
-            StaticSystem.currentScene.getGameObjects().remove(e.getRoot());
+            e.getRoot().removeFromCurrentScene();
         }
     }
 
+    @Override
     public void onFixedTick() {
 
         freeze = true;
+
+        accelerateTo(movementSpeed, Input.getInput());
 
         if (secureTicks < 300) {
             secureTicks++;
         }
 
-        if (Game.inputUp) {
+        if (Input.inputUp) {
 
             currentDirection = Directions.Direction.UP;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setVelocity(0.35f);
             freeze = false;
-        } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_UPWARDS_FORCE).setVelocity(0f);
         }
 
-        if (Game.inputDown) {
+        if (Input.inputDown) {
+
             currentDirection = Directions.Direction.DOWN;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setVelocity(0.35f);
             freeze = false;
-        } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_DOWNWARDS_FORCE).setVelocity(0f);
         }
 
-        if (Game.inputRight) {
-            currentDirection = Directions.Direction.RIGHT;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setVelocity(0.35f);
-            freeze = false;
-        } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_RIGHTWARDS_FORCE).setVelocity(0f);
-        }
+        if (Input.inputLeft) {
 
-        if (Game.inputLeft) {
             currentDirection = Directions.Direction.LEFT;
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setVelocity(0.35f);
             freeze = false;
-        } else {
-            getPhysics().getForce(SimplePhysicsComponent.DEFAULT_LEFTWARDS_FORCE).setVelocity(0f);
+        }
+
+        if (Input.inputRight) {
+
+            currentDirection = Directions.Direction.RIGHT;
+            freeze = false;
         }
 
         if (currentDirection != null) {
@@ -201,15 +195,12 @@ public class Player extends GameObject {
             ticks = 0;
         }
 
-        if (Game.keyboardInput.isSpace()) {
+        if (Input.keyboardInput.isSpace()) {
             shoot();
         }
     }
 
-    public void onTick() {
-
-    }
-
+    @Override
     public void draw(SaltyGraphics graphics) {
 
         if (freeze) {
@@ -228,22 +219,22 @@ public class Player extends GameObject {
 
             if (currentDirection == null) {
 
-                StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
+                SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
             } else {
                 switch (currentDirection) {
 
 
                     case RIGHT:
-                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
                         break;
                     case LEFT:
-                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
                         break;
                     case UP:
-                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.UP));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.UP));
                         break;
                     case DOWN:
-                        StaticSystem.currentScene.addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
                         break;
                 }
             }

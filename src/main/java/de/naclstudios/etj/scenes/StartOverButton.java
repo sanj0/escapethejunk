@@ -1,11 +1,12 @@
 package de.naclstudios.etj.scenes;
 
 import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.ui.elements.Button;
-import de.edgelord.saltyengine.utils.StaticSystem;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.InvocationTargetException;
 
 public class StartOverButton extends Button {
 
@@ -20,6 +21,16 @@ public class StartOverButton extends Button {
 
     public void onClick(MouseEvent mouseEvent) {
 
-        StaticSystem.currentScene = new GameScene();
+        try {
+            SceneManager.setCurrentScene("game");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }

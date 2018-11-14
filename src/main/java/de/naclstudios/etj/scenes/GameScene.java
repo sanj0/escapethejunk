@@ -16,6 +16,8 @@ public class GameScene extends Scene {
 
     public GameScene() {
 
+        disableGravity();
+
         EscapeTheJunk.currentWallDelta = 177f;
 
         player = new Player();
@@ -32,7 +34,7 @@ public class GameScene extends Scene {
         addGameObject(new HorizontalWall(Directions.Direction.DOWN));
         addWalls();
 
-        addDrawingRoutin(new DrawBackground());
+        addDrawingRoutine(new DrawBackground());
 
         addGameObject(new Door());
     }

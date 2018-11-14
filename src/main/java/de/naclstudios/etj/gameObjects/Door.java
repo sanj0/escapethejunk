@@ -7,13 +7,14 @@ import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
+import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Vector2f;
-import de.edgelord.saltyengine.utils.StaticSystem;
-import de.naclstudios.etj.scenes.EndScene;
+import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.GameScene;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 
 public class Door extends GameObject {
 
@@ -38,7 +39,18 @@ public class Door extends GameObject {
             Player player = (Player) e.getRoot();
 
             if (player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS) {
-                StaticSystem.currentScene = new EndScene(true);
+                EscapeTheJunk.lastGameWon = true;
+                try {
+                    SceneManager.setCurrentScene("end");
+                } catch (IllegalAccessException e1) {
+                    e1.printStackTrace();
+                } catch (InstantiationException e1) {
+                    e1.printStackTrace();
+                } catch (NoSuchMethodException e1) {
+                    e1.printStackTrace();
+                } catch (InvocationTargetException e1) {
+                    e1.printStackTrace();
+                }
                 System.out.println("You win!");
             }
         }
@@ -55,7 +67,7 @@ public class Door extends GameObject {
     public void draw(SaltyGraphics graphics) {
 
         graphics.setColor(Color.yellow);
-        graphics.drawRect(10, 10, 195, 30);
-        graphics.fillRect(10, 10, (float) (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
+        graphics.outlineRect(10, 10, 195, 30);
+        graphics.drawRect(10, 10, (float) (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
     }
 }

@@ -1,13 +1,14 @@
 package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.gameobject.FixedTask;
+import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Vector2f;
-import de.edgelord.saltyengine.utils.StaticSystem;
+import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.util.Random;
 
-public class JunkGenerator implements FixedTask {
+public class JunkGenerator extends FixedTask {
 
     private int ticks = 0;
     private Random random = new Random();
@@ -22,9 +23,9 @@ public class JunkGenerator implements FixedTask {
         int min = (int) EscapeTheJunk.currentWallDelta;
         int maxX = (int) (1600 - EscapeTheJunk.currentWallDelta);
 
-        if (ticks == spawnRate * StaticSystem.fixedTickMillis) {
+        if (ticks == spawnRate * SaltySystem.fixedTickMillis) {
             if (maxX - min > 0) {
-                StaticSystem.currentScene.getGameObjects().add(StaticSystem.currentScene.getGameObjects().size() - 5, new JunkHill(new Vector2f(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
+                SceneManager.getCurrentScene().addGameObject(SceneManager.getCurrentScene().getGameObjectCount() - 5, new JunkHill(new Vector2f(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
             }
 
             ticks = 0;

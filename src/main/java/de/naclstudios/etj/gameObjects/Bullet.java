@@ -5,7 +5,7 @@ import de.edgelord.saltyengine.gameobject.GameObject;
 import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
-import de.edgelord.saltyengine.utils.StaticSystem;
+import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.*;
@@ -55,7 +55,7 @@ public class Bullet extends GameObject {
 
         if (!e.getRoot().getTag().equals("de.naclstudios.etj.gameObject.player") && !e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.keyFragment")) {
 
-            StaticSystem.currentScene.getGameObjects().remove(this);
+            removeFromCurrentScene();
         }
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.rat")) {
@@ -68,9 +68,9 @@ public class Bullet extends GameObject {
     public void onFixedTick() {
 
         if (delta >= range) {
-            StaticSystem.currentScene.getGameObjects().remove(this);
+            removeFromCurrentScene();
         } else {
-            float nextStep = velocity * StaticSystem.fixedTickMillis;
+            float nextStep = velocity * SaltySystem.fixedTickMillis;
             if (direction == null) {
             } else {
                 move(nextStep, direction);
@@ -87,7 +87,7 @@ public class Bullet extends GameObject {
 
         if (!isDeprecated()) {
             graphics.setColor(color);
-            graphics.fillOval(getX(), getY(), getWidth(), getHeight());
+            graphics.drawOval(getX(), getY(), getWidth(), getHeight());
         }
     }
 

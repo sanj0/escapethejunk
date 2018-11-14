@@ -1,19 +1,20 @@
 package de.naclstudios.etj.scenes;
 
 import de.edgelord.saltyengine.audio.AudioSystem;
-import de.edgelord.saltyengine.components.gfx.SceneFade;
+import de.edgelord.saltyengine.components.gfx.scene.SceneFade;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.Scene;
+import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.ui.UISystem;
 import de.edgelord.saltyengine.ui.elements.TexturedButton;
-import de.edgelord.saltyengine.utils.StaticSystem;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 
 public class MenuScreen extends Scene {
 
@@ -31,7 +32,7 @@ public class MenuScreen extends Scene {
 
         addAudio();
 
-        addDrawingRoutin(new MenuBackGround());
+        addDrawingRoutine(new MenuBackGround());
 
         audioSystem.setClipVolume("de.naclstudios.etj.music.menuMusic", 0.25f);
 
@@ -48,21 +49,37 @@ public class MenuScreen extends Scene {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
-                SceneFade sceneFade = new SceneFade(this, "fadeOut", SceneFade.Mode.FADE_OUT, Color.white) {
+                final SceneFade fadeIn = new SceneFade("fadeIn", SceneFade.Mode.FADE_IN, new Color(176, 100, 29));
+                fadeIn.setDuration(750);
+
+                Game.getDefaultGFXController().addComponent(fadeIn);
+                fadeIn.fadeInit();
+
+                SceneFade fadeOut = new SceneFade("fadeIn", SceneFade.Mode.FADE_OUT, new Color(176, 100, 29)) {
                     @Override
                     public void onFadeFinish() {
-                        StaticSystem.currentScene = new GameScene();
+                        try {
+                            SceneManager.setCurrentScene("game");
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                        fadeIn.startGFX();
                     }
                 };
-                sceneFade.setDuration(350);
-                this.addComponent(sceneFade);
+                fadeOut.setDuration(750);
 
-                sceneFade.fadeInit();
-                sceneFade.startGFX();
+                Game.getDefaultGFXController().addComponent(fadeOut);
+                fadeOut.fadeInit();
             }
         };
 
-        TexturedButton exitutton = new TexturedButton("exit", new Vector2f(Game.getHost().getHorizontalCentrePosition(280), 600), 280, 156, exitButtonTexture) {
+        TexturedButton exitButton = new TexturedButton("exit", new Vector2f(Game.getHost().getHorizontalCentrePosition(280), 600), 280, 156, exitButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
@@ -81,9 +98,9 @@ public class MenuScreen extends Scene {
         };
 
         playButton.setDrawText(false);
-        exitutton.setDrawText(false);
+        exitButton.setDrawText(false);
 
         ui.addElement(playButton);
-        ui.addElement(exitutton);
+        ui.addElement(exitButton);
     }
 }
