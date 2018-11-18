@@ -47,10 +47,6 @@ public class JunkHill extends GameObject {
 
     }
 
-    public void onTick() {
-
-    }
-
     public void draw(SaltyGraphics graphics) {
 
     }
@@ -67,7 +63,7 @@ public class JunkHill extends GameObject {
 
         hitCounter++;
 
-        if (hitCounter >= 3) {
+        if (hitCounter >= 2) {
             EscapeTheJunk.sounds.play("junk_destroyed");
             removeFromCurrentScene();
         }
