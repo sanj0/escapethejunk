@@ -35,6 +35,7 @@ public class GameScene extends Scene {
         addWalls();
 
         addDrawingRoutine(new DrawBackground());
+        addDrawingRoutine(new HighScoreScreen());
 
         addGameObject(new Door());
     }
@@ -52,6 +53,11 @@ public class GameScene extends Scene {
         /*
         There would normally be a for or while...
          */
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
+        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));

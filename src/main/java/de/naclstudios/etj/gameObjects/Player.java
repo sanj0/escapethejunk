@@ -76,6 +76,7 @@ public class Player extends GameObject {
         addComponent(animationRender);
         currentDirection = Directions.Direction.DOWN;
         readAnimation();
+        getPhysics().addTagToIgnore("de.naclstudios.etj.gameObjects.rat");
     }
 
     public void initialize() {

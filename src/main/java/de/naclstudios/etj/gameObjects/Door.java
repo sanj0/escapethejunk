@@ -67,7 +67,17 @@ public class Door extends GameObject {
     public void draw(SaltyGraphics graphics) {
 
         graphics.setColor(Color.yellow);
-        graphics.outlineRect(10, 10, 195, 30);
-        graphics.drawRect(10, 10, (float) (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
+        graphics.setFont(graphics.getFont().deriveFont(25f));
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD));
+        graphics.outlineRect(10, 25, 195, 30);
+        if (GameScene.player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS) {
+            graphics.drawRect(10, 25, 195, 30);
+            int moreThanExcpeted = GameScene.player.getCollectedKeyFragments() - Player.REQUIREDKEYFRAGMENTS;
+            EscapeTheJunk.highScore = Math.max(moreThanExcpeted, EscapeTheJunk.highScore);
+            graphics.drawText("+" + moreThanExcpeted, 210, 50);
+        } else {
+            graphics.drawRect(10, 25, (float) (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
+            graphics.drawText("-" + (Player.REQUIREDKEYFRAGMENTS - GameScene.player.getCollectedKeyFragments()), 210, 50);
+        }
     }
 }

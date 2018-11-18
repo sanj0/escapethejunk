@@ -10,6 +10,7 @@ import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.ui.UISystem;
 import de.edgelord.saltyengine.ui.elements.TexturedButton;
+import de.naclstudios.etj.gameObjects.HighScoreScreen;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -33,6 +34,7 @@ public class MenuScreen extends Scene {
         addAudio();
 
         addDrawingRoutine(new MenuBackGround());
+        addDrawingRoutine(new HighScoreScreen());
 
         audioSystem.setClipVolume("de.naclstudios.etj.music.menuMusic", 0.25f);
 
