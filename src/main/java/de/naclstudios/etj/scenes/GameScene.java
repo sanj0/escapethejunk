@@ -4,6 +4,7 @@ import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.scene.Scene;
 import de.edgelord.saltyengine.transform.Vector2f;
 import de.edgelord.saltyengine.utils.Directions;
+import de.naclstudios.etj.HighscoreAgent;
 import de.naclstudios.etj.gameObjects.*;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
@@ -35,9 +36,10 @@ public class GameScene extends Scene {
         addWalls();
 
         addDrawingRoutine(new DrawBackground());
-        addDrawingRoutine(new HighScoreScreen());
 
         addGameObject(new Door());
+
+        HighscoreAgent.startStopwatch();
     }
 
     private void addWalls() {
@@ -53,9 +55,6 @@ public class GameScene extends Scene {
         /*
         There would normally be a for or while...
          */
-        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
-        addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));
         addGameObject(new Rat(new Vector2f(random.nextInt(1600), random.nextInt(950))));

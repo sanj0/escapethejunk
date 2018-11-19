@@ -18,7 +18,7 @@ public class EscapeTheJunk extends Game {
     public static boolean lastGameWon = false;
     public static AudioSystem sounds = new AudioSystem();
 
-    public static int highScore = 0;
+    public static long highScore = 0;
 
     public EscapeTheJunk(long fixedTickMillis) {
         super(1600, 950, "Escape the Junk", fixedTickMillis);
@@ -35,10 +35,16 @@ public class EscapeTheJunk extends Game {
 
         SceneManager.setCurrentScene("menu");
 
+        float sfx = 0.05f;
+
         sounds.loadNewAudio("rat_dies", "audio/sound/rat_dies.wav");
+        sounds.setClipVolume("rat_dies", sfx);
         sounds.loadNewAudio("junk_destroyed", "audio/sound/junk_destroyed.wav");
+        sounds.setClipVolume("junk_destroyed", sfx);
         sounds.loadNewAudio("key_collected", "audio/sound/key_collected.wav");
+        sounds.setClipVolume("key_collected", sfx);
         sounds.loadNewAudio("shot", "audio/sound/shot.wav");
+        sounds.setClipVolume("shot", sfx);
 
         Serializer.add(new HighscoreAgent());
         Serializer.doDeserialization();

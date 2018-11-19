@@ -70,10 +70,6 @@ public class VerticalWall extends GameObject {
         }
     }
 
-    public void onTick() {
-
-    }
-
     public void draw(SaltyGraphics graphics) {
 
     }

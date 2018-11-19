@@ -33,7 +33,7 @@ public class Player extends GameObject {
 
     private AnimationRender animationRender = new AnimationRender(this, "de.naclstudios.etj.gameObjects.player.animationRender");
 
-    private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 71, 93);
+    private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 73, 94);
 
     private Animation walkUp = new Animation(this);
     private Animation walkDown = new Animation(this);
@@ -96,14 +96,8 @@ public class Player extends GameObject {
         if (wallCount >= 2) {
             EscapeTheJunk.lastGameWon = false;
             try {
-                SceneManager.setCurrentScene("end");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+                SceneManager.setCurrentScene("end", false);
+            } catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
@@ -111,14 +105,6 @@ public class Player extends GameObject {
 
     @Override
     public void onCollision(CollisionEvent e) {
-
-        /*
-        if (EscapeTheJunk.currentWallDelta >= 764.5) {
-            if (secureTicks > 10) {
-                    SceneManager.getCurrentScene = new EndScene(false);
-            }
-        }
-        */
 
         if (e.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.weapon")) {
             setHasWeapon(true);

@@ -36,7 +36,7 @@ public class MenuScreen extends Scene {
         addDrawingRoutine(new MenuBackGround());
         addDrawingRoutine(new HighScoreScreen());
 
-        audioSystem.setClipVolume("de.naclstudios.etj.music.menuMusic", 0.25f);
+        audioSystem.setClipVolume("de.naclstudios.etj.music.menuMusic", 0.085f);
 
         audioSystem.loop("de.naclstudios.etj.music.menuMusic");
     }
@@ -62,13 +62,7 @@ public class MenuScreen extends Scene {
                     public void onFadeFinish() {
                         try {
                             SceneManager.setCurrentScene("game");
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InstantiationException e) {
-                            e.printStackTrace();
-                        } catch (NoSuchMethodException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
+                        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
                             e.printStackTrace();
                         }
                         fadeIn.startGFX();

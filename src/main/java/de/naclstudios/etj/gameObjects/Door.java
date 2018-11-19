@@ -9,6 +9,7 @@ import de.edgelord.saltyengine.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Vector2f;
+import de.naclstudios.etj.HighscoreAgent;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.GameScene;
 
@@ -41,14 +42,8 @@ public class Door extends GameObject {
             if (player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS) {
                 EscapeTheJunk.lastGameWon = true;
                 try {
-                    SceneManager.setCurrentScene("end");
-                } catch (IllegalAccessException e1) {
-                    e1.printStackTrace();
-                } catch (InstantiationException e1) {
-                    e1.printStackTrace();
-                } catch (NoSuchMethodException e1) {
-                    e1.printStackTrace();
-                } catch (InvocationTargetException e1) {
+                    SceneManager.setCurrentScene("end", true);
+                } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e1) {
                     e1.printStackTrace();
                 }
                 System.out.println("You win!");
@@ -72,12 +67,9 @@ public class Door extends GameObject {
         graphics.outlineRect(10, 25, 195, 30);
         if (GameScene.player.getCollectedKeyFragments() >= Player.REQUIREDKEYFRAGMENTS) {
             graphics.drawRect(10, 25, 195, 30);
-            int moreThanExcpeted = GameScene.player.getCollectedKeyFragments() - Player.REQUIREDKEYFRAGMENTS;
-            EscapeTheJunk.highScore = Math.max(moreThanExcpeted, EscapeTheJunk.highScore);
-            graphics.drawText("+" + moreThanExcpeted, 210, 50);
         } else {
             graphics.drawRect(10, 25, (float) (200 / Player.REQUIREDKEYFRAGMENTS) * GameScene.player.getCollectedKeyFragments(), 30);
-            graphics.drawText("-" + (Player.REQUIREDKEYFRAGMENTS - GameScene.player.getCollectedKeyFragments()), 210, 50);
         }
+        graphics.drawText(HighscoreAgent.getCurrentTimeAsReadable(), 210, 50);
     }
 }
