@@ -18,6 +18,8 @@ public class EscapeTheJunk extends Game {
     public static boolean lastGameWon = false;
     public static AudioSystem sounds = new AudioSystem();
 
+    public static boolean corruptSavefile = false;
+
     public static long highScore = 0;
 
     public EscapeTheJunk(long fixedTickMillis) {
@@ -26,6 +28,8 @@ public class EscapeTheJunk extends Game {
 
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, IOException {
         new EscapeTheJunk(1);
+
+        saveOnExit();
 
         start(60);
 
@@ -47,6 +51,10 @@ public class EscapeTheJunk extends Game {
         sounds.setClipVolume("shot", sfx);
 
         Serializer.add(new HighscoreAgent());
-        Serializer.doDeserialization();
+        if (Serializer.doDeserialization()) {
+            corruptSavefile = true;
+            System.out.println("Due to cheating, we now have to reset your highscore to 0. Don't every try that again!");
+            highScore = 0;
+        }
     }
 }
