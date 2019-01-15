@@ -1,15 +1,16 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.saltyengine.components.rendering.AnimationRender;
+import de.edgelord.saltyengine.components.DrawHitboxComponent;
+import de.edgelord.saltyengine.components.animation.AnimationRender;
 import de.edgelord.saltyengine.core.ImageLoader;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
-import de.edgelord.saltyengine.cosmetic.Animation;
-import de.edgelord.saltyengine.cosmetic.Spritesheet;
+import de.edgelord.saltyengine.effect.Spritesheet;
+import de.edgelord.saltyengine.effect.SpritesheetAnimation;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Coordinates;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
@@ -23,12 +24,12 @@ public class Rat extends GameObject {
 
     private Spritesheet spritesheet = new Spritesheet(ImageLoader.getOrLoadImage("rat", "pictures/rat.png"), 477, 235);
 
-    private Animation walkRight = new Animation(this);
-    private Animation walkLeft = new Animation(this);
+    private SpritesheetAnimation walkRight = new SpritesheetAnimation(this);
+    private SpritesheetAnimation walkLeft = new SpritesheetAnimation(this);
 
     private AnimationRender render = new AnimationRender(this, "animaitonRender");
 
-    public Rat(Vector2f position) {
+    public Rat(Coordinates2f position) {
         super(position, 56, 28, "de.naclstudios.etj.gameObjects.rat");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
@@ -96,7 +97,7 @@ public class Rat extends GameObject {
 
         if (randomDir == 2) {
             if (getPosition().getX() <= 1600 - EscapeTheJunk.currentWallDelta) {
-                render.setAnimation(walkRight);
+                render.setSpritesheetAnimation(walkRight);
                 move(15f, Directions.Direction.RIGHT);
                 return;
             }
@@ -104,7 +105,7 @@ public class Rat extends GameObject {
 
         if (randomDir == 3) {
             if (getPosition().getX() >= EscapeTheJunk.currentWallDelta) {
-                render.setAnimation(walkLeft);
+                render.setSpritesheetAnimation(walkLeft);
                 move(15f, Directions.Direction.LEFT);
             }
         }

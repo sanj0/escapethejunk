@@ -1,9 +1,10 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.saltyengine.components.DrawHitboxComponent;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
@@ -24,13 +25,12 @@ public class Bullet extends GameObject {
     private Directions.Direction direction;
     private boolean deprecated = false;
 
-    public Bullet(Vector2f position, Directions.Direction direction) {
+    public Bullet(Coordinates2f position, Directions.Direction direction) {
         super(position, 12, 7, "de.naclstudios.etj.gameObjects.bullet");
 
         this.direction = direction;
 
         removeComponent(DEFAULT_PHYSICS_NAME);
-        // removeComponent(DEFAULT_PUSH_OUT_ON_COLLISION_NAME);
 
         if (direction == Directions.Direction.UP || direction == Directions.Direction.DOWN) {
             setWidth(7);
@@ -77,10 +77,6 @@ public class Bullet extends GameObject {
                 delta += nextStep;
             }
         }
-    }
-
-    public void onTick() {
-
     }
 
     public void draw(SaltyGraphics graphics) {

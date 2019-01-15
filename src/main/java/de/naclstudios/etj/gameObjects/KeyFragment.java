@@ -1,12 +1,13 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.saltyengine.components.DrawHitboxComponent;
 import de.edgelord.saltyengine.components.rendering.ImageRender;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.image.BufferedImage;
@@ -16,7 +17,7 @@ public class KeyFragment extends GameObject {
     private BufferedImage image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/key.png");
     private ImageRender render = new ImageRender(this, "imageRender", image);
 
-    public KeyFragment(Vector2f position) {
+    public KeyFragment(Coordinates2f position) {
         super(position, 50, 26, "de.naclstudios.etj.gameObjects.keyFragment");
 
         removeComponent(DEFAULT_PHYSICS_NAME);

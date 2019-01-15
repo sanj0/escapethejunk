@@ -1,24 +1,27 @@
 package de.naclstudios.etj.gameObjects;
 
-import de.edgelord.saltyengine.components.rendering.AnimationRender;
+import de.edgelord.saltyengine.components.DrawHitboxComponent;
+import de.edgelord.saltyengine.components.animation.AnimationRender;
+import de.edgelord.saltyengine.components.gfx.LightComponent;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
-import de.edgelord.saltyengine.cosmetic.Animation;
-import de.edgelord.saltyengine.cosmetic.Spritesheet;
+import de.edgelord.saltyengine.effect.Spritesheet;
+import de.edgelord.saltyengine.effect.SpritesheetAnimation;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.input.Input;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.SceneManager;
 import de.edgelord.saltyengine.transform.Coordinates;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.TransformRelationMode;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.SaltySystem;
-import de.naclstudios.etj.main.EscapeTheJunk;
 
 import java.awt.image.BufferedImage;
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -35,10 +38,10 @@ public class Player extends GameObject {
 
     private Spritesheet mainCharSpriteSheet = new Spritesheet(imageFactory.getOptimizedImageResource("pictures/mainchar.png"), 73, 94);
 
-    private Animation walkUp = new Animation(this);
-    private Animation walkDown = new Animation(this);
-    private Animation walkRight = new Animation(this);
-    private Animation walkLeft = new Animation(this);
+    private SpritesheetAnimation walkUp = new SpritesheetAnimation(this);
+    private SpritesheetAnimation walkDown = new SpritesheetAnimation(this);
+    private SpritesheetAnimation walkRight = new SpritesheetAnimation(this);
+    private SpritesheetAnimation walkLeft = new SpritesheetAnimation(this);
 
     private BufferedImage up = mainCharSpriteSheet.getManualSprite(1, 1);
     private BufferedImage down = mainCharSpriteSheet.getManualSprite(2, 1);
@@ -60,8 +63,10 @@ public class Player extends GameObject {
     private Directions.Direction currentDirection;
     private boolean freeze = true;
 
+    private List<GameObject> touchingGameObjects = new LinkedList<>();
+
     private boolean hasWeapon = false;
-    private int weaponCooldown = (int) (350 * SaltySystem.fixedTickMillis);
+    private int weaponCooldown = (int) (250 / SaltySystem.fixedTickMillis);
     private boolean cooldown = false;
     private int ticks = 0;
 
@@ -72,11 +77,12 @@ public class Player extends GameObject {
 
         animationRender.setTicksPerFrame((int) (175 / SaltySystem.fixedTickMillis));
 
-        // removeComponent(DEFAULT_PHYSICS_NAME);
         addComponent(animationRender);
         currentDirection = Directions.Direction.DOWN;
         readAnimation();
         getPhysics().addTagToIgnore("de.naclstudios.etj.gameObjects.rat");
+        getPhysics().addTagToIgnore("de.naclstudios.etj.gameObjects.keyFragment");
+        getPhysics().addTagToIgnore("de.naclstudios.etj.gameObjects.bullet");
     }
 
     public void initialize() {
@@ -86,15 +92,18 @@ public class Player extends GameObject {
     public void onCollisionDetectionFinish(List<CollisionEvent> collisions) {
 
         int wallCount = 0;
+        touchingGameObjects.clear();
 
         for (CollisionEvent collisionEvent : collisions) {
+
+            touchingGameObjects.add(collisionEvent.getRoot());
+
             if (collisionEvent.getRoot().getTag().equals("de.naclstudios.etj.gameObjects.wall")) {
                 wallCount++;
             }
         }
 
         if (wallCount >= 2) {
-            EscapeTheJunk.lastGameWon = false;
             try {
                 SceneManager.setCurrentScene("end", false);
             } catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
@@ -151,22 +160,22 @@ public class Player extends GameObject {
             switch (currentDirection) {
 
                 case RIGHT:
-                    animationRender.setAnimation(walkRight);
+                    animationRender.setSpritesheetAnimation(walkRight);
                     currentFreezeImage = right;
                     setSlimHitbox();
                     break;
                 case LEFT:
-                    animationRender.setAnimation(walkLeft);
+                    animationRender.setSpritesheetAnimation(walkLeft);
                     currentFreezeImage = left;
                     setSlimHitbox();
                     break;
                 case UP:
-                    animationRender.setAnimation(walkUp);
+                    animationRender.setSpritesheetAnimation(walkUp);
                     currentFreezeImage = up;
                     setBigHitbox();
                     break;
                 case DOWN:
-                    animationRender.setAnimation(walkDown);
+                    animationRender.setSpritesheetAnimation(walkDown);
                     currentFreezeImage = down;
                     setBigHitbox();
                     break;
@@ -190,6 +199,10 @@ public class Player extends GameObject {
     @Override
     public void draw(SaltyGraphics graphics) {
 
+        for (GameObject gameObject : touchingGameObjects) {
+            //graphics.drawRect(gameObject);
+        }
+
         if (freeze) {
             animationRender.disable();
             graphics.drawImage(currentFreezeImage, getX(), getY(), getWidth(), getHeight());
@@ -206,22 +219,22 @@ public class Player extends GameObject {
 
             if (currentDirection == null) {
 
-                SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
+                SceneManager.getCurrentScene().addGameObject(new Bullet(new Coordinates2f(getCoordinates().getX() + 50, getCoordinates().getY() + 53), Directions.Direction.DOWN));
             } else {
                 switch (currentDirection) {
 
 
                     case RIGHT:
-                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Coordinates2f(getX() + 25, getY() + 53), Directions.Direction.RIGHT));
                         break;
                     case LEFT:
-                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Coordinates2f(getX() + 25, getY() + 53), Directions.Direction.LEFT));
                         break;
                     case UP:
-                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.UP));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Coordinates2f(getX() + 50, getY() + 53), Directions.Direction.UP));
                         break;
                     case DOWN:
-                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Vector2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
+                        SceneManager.getCurrentScene().addGameObject(new Bullet(new Coordinates2f(getX() + 50, getY() + 53), Directions.Direction.DOWN));
                         break;
                 }
             }

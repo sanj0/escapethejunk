@@ -1,9 +1,12 @@
 package de.naclstudios.etj.main;
 
-import de.edgelord.saltyengine.audio.AudioSystem;
+import de.edgelord.saltyengine.audio.AudioPlayer;
 import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.core.GameConfig;
+import de.edgelord.saltyengine.factory.AudioFactory;
 import de.edgelord.saltyengine.io.serialization.Serializer;
 import de.edgelord.saltyengine.scene.SceneManager;
+import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.HighscoreAgent;
 import de.naclstudios.etj.scenes.EndScene;
 import de.naclstudios.etj.scenes.GameScene;
@@ -16,18 +19,14 @@ public class EscapeTheJunk extends Game {
 
     public static float currentWallDelta = 177f;
     public static boolean lastGameWon = false;
-    public static AudioSystem sounds = new AudioSystem();
+    public static AudioPlayer sounds = new AudioPlayer(new AudioFactory(SaltySystem.defaultResource));
 
     public static boolean corruptSavefile = false;
 
     public static long highScore = 0;
 
-    public EscapeTheJunk(long fixedTickMillis) {
-        super(1600, 950, "Escape the Junk", fixedTickMillis);
-    }
-
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, IOException {
-        new EscapeTheJunk(1);
+        init(GameConfig.config(1600, 950, "Escape the Junk", 1));
 
         saveOnExit();
 
@@ -48,7 +47,7 @@ public class EscapeTheJunk extends Game {
         sounds.loadNewAudio("key_collected", "audio/sound/key_collected.wav");
         sounds.setClipVolume("key_collected", sfx);
         sounds.loadNewAudio("shot", "audio/sound/shot.wav");
-        sounds.setClipVolume("shot", sfx);
+        sounds.setClipVolume("shot", sfx * 2f);
 
         Serializer.add(new HighscoreAgent());
         if (Serializer.doDeserialization()) {

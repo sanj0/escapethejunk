@@ -1,15 +1,17 @@
 package de.naclstudios.etj.scenes;
 
-import de.edgelord.saltyengine.audio.AudioSystem;
+import de.edgelord.saltyengine.audio.AudioPlayer;
 import de.edgelord.saltyengine.components.gfx.scene.SceneFade;
 import de.edgelord.saltyengine.core.Game;
+import de.edgelord.saltyengine.factory.AudioFactory;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.Scene;
 import de.edgelord.saltyengine.scene.SceneManager;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.edgelord.saltyengine.ui.UISystem;
 import de.edgelord.saltyengine.ui.elements.TexturedButton;
+import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.gameObjects.HighScoreScreen;
 
 import java.awt.*;
@@ -20,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 public class MenuScreen extends Scene {
 
     private UISystem ui;
-    private AudioSystem audioSystem = new AudioSystem();
+    private AudioPlayer audioSystem = new AudioPlayer(new AudioFactory(SaltySystem.defaultResource));
     private ImageFactory imageFactory = new ImageFactory(new InnerResource());
     private BufferedImage playButtonTexture = imageFactory.getImageResource("pictures/play-button.png");
     private BufferedImage exitButtonTexture = imageFactory.getImageResource("pictures/exit-button.png");
@@ -47,7 +49,7 @@ public class MenuScreen extends Scene {
 
     private void addUI() {
 
-        TexturedButton playButton = new TexturedButton("play", new Vector2f(Game.getHost().getHorizontalCentrePosition(450), 200), 450, 276, playButtonTexture) {
+        TexturedButton playButton = new TexturedButton("play", new Coordinates2f(Game.getHost().getHorizontalCentrePosition(450), 200), 450, 276, playButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 
@@ -75,7 +77,7 @@ public class MenuScreen extends Scene {
             }
         };
 
-        TexturedButton exitButton = new TexturedButton("exit", new Vector2f(Game.getHost().getHorizontalCentrePosition(280), 600), 280, 156, exitButtonTexture) {
+        TexturedButton exitButton = new TexturedButton("exit", new Coordinates2f(Game.getHost().getHorizontalCentrePosition(280), 600), 280, 156, exitButtonTexture) {
             @Override
             public void onClick(MouseEvent mouseEvent) {
 

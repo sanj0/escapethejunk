@@ -2,7 +2,7 @@ package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.gameobject.DrawingRoutine;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.utils.ColorUtil;
 import de.naclstudios.etj.HighscoreAgent;
 import de.naclstudios.etj.main.EscapeTheJunk;

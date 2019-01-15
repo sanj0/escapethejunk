@@ -1,12 +1,13 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.saltyengine.components.DrawHitboxComponent;
 import de.edgelord.saltyengine.components.rendering.ImageRender;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.edgelord.saltyengine.utils.Directions;
 import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
@@ -24,16 +25,15 @@ public class VerticalWall extends GameObject {
     private int ticks = 0;
 
     public VerticalWall(Directions.Direction direction) {
-        super(new Vector2f(-1000, -1000), 950, 950, "de.naclstudios.etj.gameObjects.wall");
+        super(new Coordinates2f(-1000, -1000), 950, 950, "de.naclstudios.etj.gameObjects.wall");
 
         this.direction = direction;
-
         if (direction == Directions.Direction.LEFT) {
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_right.png");
-            setPosition(new Vector2f(1423, 0));
+            setPosition(new Coordinates2f(1423, 0));
         } else if (direction == Directions.Direction.RIGHT) {
             image = new ImageFactory(new InnerResource()).getOptimizedImageResource("pictures/walls/wall_left.png");
-            setPosition(new Vector2f(-773, 0));
+            setPosition(new Coordinates2f(-773, 0));
         }
 
         addComponent(new ImageRender(this, "de.naclstudios.etj.gameObject.walls.imageRender", image));

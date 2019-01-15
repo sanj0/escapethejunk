@@ -1,14 +1,15 @@
 package de.naclstudios.etj.gameObjects;
 
+import de.edgelord.saltyengine.components.DrawHitboxComponent;
 import de.edgelord.saltyengine.components.rendering.ImageRender;
 import de.edgelord.saltyengine.core.Game;
 import de.edgelord.saltyengine.core.event.CollisionEvent;
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.GameObject;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 import de.edgelord.saltyengine.scene.SceneManager;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.naclstudios.etj.HighscoreAgent;
 import de.naclstudios.etj.main.EscapeTheJunk;
 import de.naclstudios.etj.scenes.GameScene;
@@ -23,7 +24,7 @@ public class Door extends GameObject {
     private ImageRender render = new ImageRender(this, "de.naclstudios.gameObjects.door.imageRender", image.getSubimage(0, 0, 204, 87));
 
     public Door() {
-        super(new Vector2f(Game.getHost().getHorizontalCentrePosition(204), 25), 204, 87, "de.naclstudios.etj.gameObject.door");
+        super(new Coordinates2f(Game.getHost().getHorizontalCentrePosition(204), 25), 204, 87, "de.naclstudios.etj.gameObject.door");
 
         removeComponent(DEFAULT_PHYSICS_NAME);
 

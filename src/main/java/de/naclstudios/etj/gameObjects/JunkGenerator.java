@@ -2,7 +2,7 @@ package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.gameobject.FixedTask;
 import de.edgelord.saltyengine.scene.SceneManager;
-import de.edgelord.saltyengine.transform.Vector2f;
+import de.edgelord.saltyengine.transform.Coordinates2f;
 import de.edgelord.saltyengine.utils.SaltySystem;
 import de.naclstudios.etj.main.EscapeTheJunk;
 
@@ -25,7 +25,7 @@ public class JunkGenerator extends FixedTask {
 
         if (ticks == spawnRate * SaltySystem.fixedTickMillis) {
             if (maxX - min > 0) {
-                SceneManager.getCurrentScene().addGameObject(SceneManager.getCurrentScene().getGameObjectCount() - 5, new JunkHill(new Vector2f(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
+                SceneManager.getCurrentScene().addGameObject(SceneManager.getCurrentScene().getGameObjectCount() - 5, new JunkHill(new Coordinates2f(random.nextInt(maxX - min) + min, random.nextInt(620 - 100) + 100)));
             }
 
             ticks = 0;

@@ -2,7 +2,7 @@ package de.naclstudios.etj.gameObjects;
 
 import de.edgelord.saltyengine.factory.ImageFactory;
 import de.edgelord.saltyengine.gameobject.DrawingRoutine;
-import de.edgelord.saltyengine.graphics.SaltyGraphics;
+import de.edgelord.saltyengine.core.graphics.SaltyGraphics;
 import de.edgelord.saltyengine.resource.InnerResource;
 
 import java.awt.image.BufferedImage;
